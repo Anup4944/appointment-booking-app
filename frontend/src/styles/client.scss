@@ -1,0 +1,42 @@
+@import "fonts";
+@import "colors";
+
+.mainCart {
+  display: flex;
+  justify-content: center;
+  margin: 2rem auto;
+  flex-wrap: wrap;
+  height: 50vh;
+  overflow-y: auto;
+
+  .bookingCard {
+    border: 1px solid gray;
+    padding: 1rem;
+    margin: 1.5rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    font: $secondaryFont;
+    background-color: $white;
+
+    ul > li {
+      list-style-type: none;
+      margin: 0.5rem 0;
+    }
+
+    button {
+      padding: 10px;
+      outline: none;
+      border: none;
+      background-color: $btn-text-clr;
+      color: $white;
+      cursor: pointer;
+      font: $secondaryFont;
+      transition: 0.1s ease-in;
+      font: $mini;
+      &:hover {
+        background-color: $main-backgroud;
+        color: $btn-text-clr;
+      }
+    }
+  }
+}

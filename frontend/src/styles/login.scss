@@ -1,0 +1,103 @@
+@import "colors";
+@import "fonts";
+
+.login {
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .cart {
+    display: flex;
+    width: 50%;
+    border-radius: 10px;
+    min-height: 500px;
+    overflow: hidden;
+    .left {
+      flex: 1;
+      background: $gradient,
+        url("https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80")
+          center;
+      background-size: cover;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      color: $white;
+      h1 {
+        font: $mainFont;
+        line-height: 100px;
+      }
+      p {
+        font: $primaryFont;
+      }
+      button {
+        display: flex;
+        justify-content: center;
+        border-radius: 20px;
+        align-items: center;
+        gap: 5px;
+        width: 50%;
+        padding: 10px;
+        border: none;
+        background-color: $white;
+        color: $btn-text-clr;
+        cursor: pointer;
+        font: $secondaryFont;
+        transition: 0.1s ease-in;
+        font: $mini;
+        &:hover {
+          background-color: $btn-text-clr;
+          color: $white;
+        }
+      }
+    }
+    .right {
+      flex: 1;
+      padding: 50px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      gap: 50px;
+      background-color: $white;
+      h1 {
+        font: $primaryFont;
+        color: $headerColor;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        input {
+          border: none;
+          outline: none;
+          border-bottom: 1px solid lightgray;
+          padding: 20px 10px;
+        }
+        .passHolder {
+          display: flex;
+          align-items: center;
+          input {
+            padding-right: 90px;
+            flex: 5;
+          }
+          svg {
+            flex: 1;
+            cursor: pointer;
+            font-size: 25px;
+          }
+        }
+
+        button {
+          margin-top: 30px;
+          width: 50%;
+          padding: 15px;
+          border-radius: 10px;
+          border: none;
+          background-color: $btn-text-clr;
+          color: $white;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

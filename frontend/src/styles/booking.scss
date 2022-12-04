@@ -1,0 +1,49 @@
+@import "colors";
+
+@import "fonts";
+
+.bookingContainer {
+  padding: 2rem;
+}
+
+.bookingHeader {
+  text-align: center;
+  font: $primaryFont;
+  color: $headerColor;
+}
+
+.tableContainer {
+  margin-top: 2vmax;
+  font: $secondaryFont;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+table {
+  text-align: left;
+  position: relative;
+  border-collapse: collapse;
+  background-color: #f6f6f6;
+}
+
+td,
+th {
+  border: 1px solid #999;
+  padding: 20px;
+}
+th {
+  background: $headerColor;
+  color: white;
+  border-radius: 0;
+  position: sticky;
+  top: 0;
+  padding: 10px;
+}
+
+tfoot > tr {
+  background: $main-backgroud;
+  color: $white;
+}
+tbody > tr:hover {
+  background-color: $main-backgroud;
+}
