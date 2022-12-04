@@ -1,0 +1,12 @@
+// ADVISOR END POINTS // 
+
+### Register
+POST http://localhost:4000/api/v1/register
+Content-Type: application/json
+
+{
+    "fullName":"Anup Poudel",
+    "email":"ap@gmail.com",
+    "password":"password123",
+    "category":"Criminal"
+}
