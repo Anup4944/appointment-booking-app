@@ -6,7 +6,7 @@ Content-Type: application/json
 
 {
     "fullName":"Anup Poudel",
-    "email":"ap@gmail.com",
+    "email":"ag@gmail.com",
     "password":"password123",
     "category":"Criminal"
 }
@@ -16,7 +16,7 @@ POST http://localhost:4000/api/v1/login
 Content-Type: application/json
 
 {
-    "email":"ap@gmail.com",
+    "email":"ag@gmail.com",
     "password":"password123" 
 }
 
@@ -26,13 +26,23 @@ GET http://localhost:4000/api/v1/logout
 ### Get all advisor
 GET http://localhost:4000/api/v1/all
 
+### Get advisor profile
+GET http://localhost:4000/api/v1/profile
+
 
 ### Open availiability
 POST http://localhost:4000/api/v1/open/availability
 Content-Type: application/json
 
 {
-    "id":"638c7ffb9d934c849a3428a3",
+    "id":"6392c01f4c45797b3d6ff4a8",
     "time":"10AM",
     "availableDate":"04/04/2022"
 }
+
+
+### Get all availability
+GET http://localhost:4000/api/v1/all/availability
+
+### Delete availability
+DELETE http://localhost:4000/api/v1/delete/available/6392c6f1404496d15473584b

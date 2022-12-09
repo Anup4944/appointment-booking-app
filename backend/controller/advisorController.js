@@ -42,7 +42,9 @@ export const login = asyncAwait(async (req, res, next) => {
     return next(new ErrorHandler("Please enter your email and password", 400));
   }
 
-  const advisor = await Advisor.findOne({ email }).select("+password");
+  const advisor = await Advisor.findOne({ email })
+    .select("+password")
+    .populate("availableDatesAndTime");
 
   if (!advisor) {
     return next(new ErrorHandler("Invalid email or password", 401));
@@ -129,18 +131,59 @@ export const getAllAdvisor = asyncAwait(async (req, res) => {
   res.status(200).json({ status: true, message: "All advisors", allAdvisor });
 });
 
-// // Get advisory by token when reloading the page in frontend
-// exports.getAdvisorById = async (req, res) => {
-//   try {
-//     const advisor = await Advisor.findById(req.advisor._id).populate(
-//       "availableDatesAndTime"
-//     );
+// Get advisory by cookie when reloading the page in frontend
+export const advisorProfile = asyncAwait(async (req, res) => {
+  const advisor = await Advisor.findById(req.advisor._id).populate(
+    "availableDatesAndTime"
+  );
 
-//     res.status(200).json({ status: true, advisor });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: error.message,
-//     });
-//   }
-// };
+  res.status(200).json({ status: true, advisor });
+});
+
+export const getAllAvailability = asyncAwait(async (req, res) => {
+  const allAvailability = await Availablity.find().populate("lawyer");
+
+  if (allAvailability.length < 1) {
+    return res.status(400).json({
+      success: false,
+      message: "No dates available at the moment",
+    });
+  }
+
+  res.status(200).json({
+    status: true,
+    message: "Here are all available date and time of advisors",
+    allAvailability,
+  });
+});
+
+export const deleteAvailability = asyncAwait(async (req, res) => {
+  const advisor = await Advisor.findById(req.advisor._id);
+
+  const toBeDeleted = await Availablity.findById(req.params.id);
+
+  if (advisor._id.toString() === toBeDeleted.lawyer.toString()) {
+    if (advisor.availableDatesAndTime.includes(req.params.id)) {
+      const index = advisor.availableDatesAndTime.indexOf(req.params.id);
+
+      advisor.availableDatesAndTime.splice(index, 1);
+
+      await advisor.save();
+    }
+
+    await Availablity.deleteOne({ _id: req.params.id });
+
+    const allAvailability = await Availablity.find({ lawyer: req.body.id });
+
+    res.status(200).json({
+      status: true,
+      allAvailability,
+      message: `Your availability for ${toBeDeleted.availableDate} at ${toBeDeleted.time} has been deleted`,
+    });
+  } else {
+    res.status(200).json({
+      status: false,
+      message: `You can only delete your availability`,
+    });
+  }
+});
