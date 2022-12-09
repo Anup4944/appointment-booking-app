@@ -10,3 +10,29 @@ Content-Type: application/json
     "password":"password123",
     "category":"Criminal"
 }
+
+### Login
+POST http://localhost:4000/api/v1/login
+Content-Type: application/json
+
+{
+    "email":"ap@gmail.com",
+    "password":"password123" 
+}
+
+### Logout
+GET http://localhost:4000/api/v1/logout
+
+### Get all advisor
+GET http://localhost:4000/api/v1/all
+
+
+### Open availiability
+POST http://localhost:4000/api/v1/open/availability
+Content-Type: application/json
+
+{
+    "id":"638c7ffb9d934c849a3428a3",
+    "time":"10AM",
+    "availableDate":"04/04/2022"
+}
