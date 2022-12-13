@@ -18,12 +18,13 @@ app.use(
     saveUninitialized: false,
   })
 );
+app.use(cookieParser());
 app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
 
 connectPassport();
-app.use(cookieParser());
+
 app.use(express.json());
 app.use(
   urlencoded({
@@ -35,10 +36,12 @@ app.use(
 
 import advisorRouter from "./routes/advisorRoute.js";
 import clientRouter from "./routes/clientRoute.js";
+import bookingRouter from "./routes/bookingRoute.js";
 import passport from "passport";
 
 app.use("/api/v1", advisorRouter);
 app.use("/api/v1", clientRouter);
+app.use("/api/v1", bookingRouter);
 
 app.use(errorMiddleware);
 

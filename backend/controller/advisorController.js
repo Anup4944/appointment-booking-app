@@ -119,8 +119,9 @@ export const openAvailiability = asyncAwait(async (req, res, next) => {
 
 // Get all advisorys
 export const getAllAdvisor = asyncAwait(async (req, res) => {
-  const allAdvisor = await Advisor.find().populate("availableDatesAndTime");
-  // .populate("upComingBooking");
+  const allAdvisor = await Advisor.find().populate(
+    "availableDatesAndTime upComingBooking"
+  );
 
   if (allAdvisor.length < 0) {
     return res

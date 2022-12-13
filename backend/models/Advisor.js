@@ -34,7 +34,7 @@ const advisorSchema = new mongoose.Schema(
     upComingBooking: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Booking",
+        ref: "Bookings",
       },
     ],
   },

@@ -9,6 +9,12 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    futureBookings: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Bookings",
+      },
+    ],
   },
   {
     timestamps: true,

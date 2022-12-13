@@ -46,3 +46,22 @@ GET http://localhost:4000/api/v1/all/availability
 
 ### Delete availability
 DELETE http://localhost:4000/api/v1/delete/available/6392c6f1404496d15473584b
+
+
+// Bookings //
+
+### Create new booking
+POST http://localhost:4000/api/v1/booking
+Content-Type: application/json
+
+{
+    "time":"10AM",
+    "availableDate":"04/04/2022",
+    "lawyer":"6392c01f4c45797b3d6ff4a8",
+    "userId":"639852f319b23d396ebd9eea"
+}
+
+
+
+### Get all bookings
+GET http://localhost:4000/api/v1/booking
