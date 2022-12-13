@@ -76,3 +76,20 @@ export const allBookings = asyncAwait(async (req, res, next) => {
 
   res.status(200).json({ status: true, message: "All bookings", allBookings });
 });
+
+export const getBookingByUserId = asyncAwait(async (req, res, next) => {
+  console.log(req.session.passport.user);
+  const bookingByUserId = await Bookings.find({
+    user: req.session.passport.user,
+  });
+
+  if (bookingByUserId.length < 0) {
+    return res
+      .status(400)
+      .json({ success: false, message: "No bookings found" });
+  }
+
+  res
+    .status(200)
+    .json({ status: true, message: "All bookings", bookingByUserId });
+});

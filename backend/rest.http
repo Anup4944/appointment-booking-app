@@ -61,7 +61,10 @@ Content-Type: application/json
     "userId":"639852f319b23d396ebd9eea"
 }
 
-
-
 ### Get all bookings
 GET http://localhost:4000/api/v1/booking
+
+### Get bookings by client Id
+GET http://localhost:4000/api/v1/users/booking
+
+
