@@ -80,6 +80,12 @@ export const openAvailiability = asyncAwait(async (req, res, next) => {
     lawyer: req.body.id,
   };
 
+  if (newAvailablityData.availableDate <= Date.now()) {
+    return next(
+      new ErrorHandler("Available date must be for future dates", 402)
+    );
+  }
+
   const foundItem = availableDate.find(
     (item) =>
       item.time === req.body.time &&

@@ -100,13 +100,58 @@ export const getBookingByUserId = asyncAwait(async (req, res, next) => {
 export const deleteBookingByAdvisor = asyncAwait(async (req, res, next) => {
   const { id } = req.params;
 
-  // const allBookings = await Bookings.find({ lawyer: id });
+  const advisor = await Advisor.findById(id);
+
+  const user = await User.findById(req.body.userId);
+
+  const booking = await Bookings.findOne({
+    time: req.body.time,
+    bookedDate: new Date(req.body.bookedDate),
+    lawyer: id,
+    user: req.body.userId,
+  });
+
+  if (advisor.upComingBooking.includes(booking._id)) {
+    const index = advisor.upComingBooking.indexOf(booking._id);
+
+    advisor.upComingBooking.splice(index, 1);
+
+    await advisor.save();
+  }
+
+  if (user.futureBookings.includes(booking._id)) {
+    const index = user.futureBookings.indexOf(booking._id);
+
+    user.futureBookings.splice(index, 1);
+
+    await user.save();
+  }
+
+  const availability = await Availablity.create({
+    time: req.body.time,
+    availableDate: req.body.bookedDate,
+    lawyer: id,
+  });
+
+  advisor.availableDatesAndTime.unshift(availability._id);
+  await advisor.save();
 
   await Bookings.findOneAndRemove({
     time: req.body.time,
     bookedDate: new Date(req.body.bookedDate),
     lawyer: id,
     user: req.body.userId,
+  });
+
+  res.status(201).json({
+    success: true,
+    message: `Your booking for ${new Date(req.body.bookedDate)} at ${
+      req.body.time
+    } with client ${
+      user.name
+    } has been cancelled. Your availablity for ${new Date(
+      req.body.bookedDate
+    )}  at ${req.body.time} has been added back`,
   });
 });
 
