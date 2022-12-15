@@ -36,8 +36,8 @@ Content-Type: application/json
 
 {
     "id":"6392c01f4c45797b3d6ff4a8",
-    "time":"10AM",
-    "availableDate":"04/04/2022"
+    "time":"2AM",
+    "availableDate":"2022-01-20"
 }
 
 
@@ -45,7 +45,7 @@ Content-Type: application/json
 GET http://localhost:4000/api/v1/all/availability
 
 ### Delete availability
-DELETE http://localhost:4000/api/v1/delete/available/6392c6f1404496d15473584b
+DELETE http://localhost:4000/api/v1/delete/available/639afd35e3967d730f4c3095
 
 
 // Bookings //
@@ -55,8 +55,8 @@ POST http://localhost:4000/api/v1/booking
 Content-Type: application/json
 
 {
-    "time":"10AM",
-    "availableDate":"04/04/2022",
+    "time":"2AM",
+    "availableDate":"2022-01-20",
     "lawyer":"6392c01f4c45797b3d6ff4a8",
     "userId":"639852f319b23d396ebd9eea"
 }
@@ -68,3 +68,12 @@ GET http://localhost:4000/api/v1/booking
 GET http://localhost:4000/api/v1/users/booking
 
 
+### Delete bookign by advisor
+DELETE http://localhost:4000/api/v1/delete/advisor/booking/6392c01f4c45797b3d6ff4a8
+Content-Type: application/json
+
+{
+    "time":"10AM",
+    "bookedDate":"04/04/2022",
+    "userId":"639852f319b23d396ebd9eea"
+}

@@ -64,7 +64,6 @@ export const bookAppointment = asyncAwait(async (req, res, next) => {
 });
 
 // Get all bookings
-
 export const allBookings = asyncAwait(async (req, res, next) => {
   const allBookings = await Bookings.find().populate("lawyer user");
 
@@ -77,19 +76,39 @@ export const allBookings = asyncAwait(async (req, res, next) => {
   res.status(200).json({ status: true, message: "All bookings", allBookings });
 });
 
+// Get bookings by user Id
 export const getBookingByUserId = asyncAwait(async (req, res, next) => {
-  console.log(req.session.passport.user);
+  const user = "639852f319b23d396ebd9eea";
+
   const bookingByUserId = await Bookings.find({
-    user: req.session.passport.user,
+    user,
   });
 
-  if (bookingByUserId.length < 0) {
+  if (bookingByUserId.length <= 0) {
     return res
       .status(400)
-      .json({ success: false, message: "No bookings found" });
+      .json({ success: false, message: "You have not made any bookings yet" });
   }
 
   res
     .status(200)
-    .json({ status: true, message: "All bookings", bookingByUserId });
+    .json({ status: true, message: "Your upcoming bookings", bookingByUserId });
 });
+
+// Delete booking by Advisor Id
+
+export const deleteBookingByAdvisor = asyncAwait(async (req, res, next) => {
+  const { id } = req.params;
+
+  // const allBookings = await Bookings.find({ lawyer: id });
+
+  await Bookings.findOneAndRemove({
+    time: req.body.time,
+    bookedDate: new Date(req.body.bookedDate),
+    lawyer: id,
+    user: req.body.userId,
+  });
+});
+
+// Delete booking by Client Id
+export const deleteBookingByClient = asyncAwait(async (req, res, next) => {});

@@ -174,11 +174,8 @@ export const deleteAvailability = asyncAwait(async (req, res) => {
 
     await Availablity.deleteOne({ _id: req.params.id });
 
-    const allAvailability = await Availablity.find({ lawyer: req.body.id });
-
     res.status(200).json({
       status: true,
-      allAvailability,
       message: `Your availability for ${toBeDeleted.availableDate} at ${toBeDeleted.time} has been deleted`,
     });
   } else {
