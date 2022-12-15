@@ -37,7 +37,7 @@ Content-Type: application/json
 {
     "id":"6392c01f4c45797b3d6ff4a8",
     "time":"5AM",
-    "availableDate":"2022-01-20"
+    "availableDate":"2023-01-20"
 }
 
 
@@ -45,7 +45,7 @@ Content-Type: application/json
 GET http://localhost:4000/api/v1/all/availability
 
 ### Delete availability
-DELETE http://localhost:4000/api/v1/delete/available/639afd35e3967d730f4c3095
+DELETE http://localhost:4000/api/v1/delete/available/639bb45c0fe1c281d8b904be
 
 
 // Bookings //
@@ -55,8 +55,8 @@ POST http://localhost:4000/api/v1/booking
 Content-Type: application/json
 
 {
-    "time":"2AM",
-    "availableDate":"2022-01-20",
+    "time":"5AM",
+    "availableDate":"2023-01-20",
     "lawyer":"6392c01f4c45797b3d6ff4a8",
     "userId":"639852f319b23d396ebd9eea"
 }
@@ -73,7 +73,17 @@ DELETE http://localhost:4000/api/v1/delete/advisor/booking/6392c01f4c45797b3d6ff
 Content-Type: application/json
 
 {
-    "time":"2AM",
-    "bookedDate":"2022-01-20",
+    "time":"5AM",
+    "bookedDate":"2023-01-20",
     "userId":"639852f319b23d396ebd9eea"
+}
+
+### Delete bookign by client
+DELETE http://localhost:4000/api/v1/delete/client/booking/639852f319b23d396ebd9eea
+Content-Type: application/json
+
+{
+    "time":"5AM",
+    "bookedDate":"2023-01-20",
+    "lawyer":"6392c01f4c45797b3d6ff4a8"
 }

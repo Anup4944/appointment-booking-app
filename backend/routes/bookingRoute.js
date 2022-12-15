@@ -6,6 +6,7 @@ import {
   bookAppointment,
   deleteBookingByAdvisor,
   getBookingByUserId,
+  deleteBookingByClient,
 } from "../controller/bookingController.js";
 import { isAuthenticated } from "../middlewares/googleAuth.js";
 import { isAuth } from "../middlewares/auth.js";
@@ -15,5 +16,8 @@ router.route("/users/booking").get(getBookingByUserId);
 router
   .route("/delete/advisor/booking/:id")
   .delete(isAuth, deleteBookingByAdvisor);
+router
+  .route("/delete/client/booking/:id")
+  .delete(isAuth, deleteBookingByClient);
 
 export default router;

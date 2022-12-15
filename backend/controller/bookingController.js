@@ -67,10 +67,8 @@ export const bookAppointment = asyncAwait(async (req, res, next) => {
 export const allBookings = asyncAwait(async (req, res, next) => {
   const allBookings = await Bookings.find().populate("lawyer user");
 
-  if (allBookings.length < 0) {
-    return res
-      .status(400)
-      .json({ success: false, message: "No bookings found" });
+  if (allBookings.length <= 0) {
+    return next(new ErrorHandler("No bookings found"));
   }
 
   res.status(200).json({ status: true, message: "All bookings", allBookings });
@@ -85,9 +83,7 @@ export const getBookingByUserId = asyncAwait(async (req, res, next) => {
   });
 
   if (bookingByUserId.length <= 0) {
-    return res
-      .status(400)
-      .json({ success: false, message: "You have not made any bookings yet" });
+    return next(new ErrorHandler("You have not made any bookings yet"));
   }
 
   res
@@ -98,18 +94,26 @@ export const getBookingByUserId = asyncAwait(async (req, res, next) => {
 // Delete booking by Advisor Id
 
 export const deleteBookingByAdvisor = asyncAwait(async (req, res, next) => {
+  // advisor id
   const { id } = req.params;
 
   const advisor = await Advisor.findById(id);
 
   const user = await User.findById(req.body.userId);
 
+  // find booking
   const booking = await Bookings.findOne({
     time: req.body.time,
     bookedDate: new Date(req.body.bookedDate),
     lawyer: id,
     user: req.body.userId,
   });
+
+  if (!booking) {
+    return next(new ErrorHandler("No booking found", 404));
+  }
+
+  // delete advisor's upcoming booking
 
   if (advisor.upComingBooking.includes(booking._id)) {
     const index = advisor.upComingBooking.indexOf(booking._id);
@@ -118,6 +122,7 @@ export const deleteBookingByAdvisor = asyncAwait(async (req, res, next) => {
 
     await advisor.save();
   }
+  // delete client's upcoming booking
 
   if (user.futureBookings.includes(booking._id)) {
     const index = user.futureBookings.indexOf(booking._id);
@@ -127,14 +132,18 @@ export const deleteBookingByAdvisor = asyncAwait(async (req, res, next) => {
     await user.save();
   }
 
+  // re create availability
   const availability = await Availablity.create({
     time: req.body.time,
     availableDate: req.body.bookedDate,
     lawyer: id,
   });
 
+  // add availability back
   advisor.availableDatesAndTime.unshift(availability._id);
   await advisor.save();
+
+  // delete booking
 
   await Bookings.findOneAndRemove({
     time: req.body.time,
@@ -156,4 +165,57 @@ export const deleteBookingByAdvisor = asyncAwait(async (req, res, next) => {
 });
 
 // Delete booking by Client Id
-export const deleteBookingByClient = asyncAwait(async (req, res, next) => {});
+export const deleteBookingByClient = asyncAwait(async (req, res, next) => {
+  // client Id
+  const { id } = req.params;
+
+  const advisor = await Advisor.findOne({ _id: req.body.lawyer });
+
+  const user = await User.findById(id);
+
+  const booking = await Bookings.findOne({
+    time: req.body.time,
+    bookedDate: new Date(req.body.bookedDate),
+    lawyer: req.body.lawyer,
+    user: id,
+  });
+
+  if (advisor.upComingBooking.includes(booking._id)) {
+    const index = advisor.upComingBooking.indexOf(booking._id);
+
+    advisor.upComingBooking.splice(index, 1);
+
+    await advisor.save();
+  }
+
+  if (user.futureBookings.includes(booking._id)) {
+    const index = user.futureBookings.indexOf(booking._id);
+
+    user.futureBookings.splice(index, 1);
+
+    await user.save();
+  }
+
+  const availability = await Availablity.create({
+    time: req.body.time,
+    availableDate: req.body.bookedDate,
+    lawyer: req.body.lawyer,
+  });
+
+  advisor.availableDatesAndTime.unshift(availability._id);
+  await advisor.save();
+
+  await Bookings.findOneAndRemove({
+    time: req.body.time,
+    bookedDate: new Date(req.body.bookedDate),
+    lawyer: req.body.lawyer,
+    user: id,
+  });
+
+  res.status(201).json({
+    success: true,
+    message: `Your booking for ${new Date(req.body.bookedDate)} at ${
+      req.body.time
+    } with lawyer ${advisor.fullName} has been cancelled. `,
+  });
+});
