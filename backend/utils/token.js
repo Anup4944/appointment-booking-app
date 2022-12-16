@@ -1,4 +1,4 @@
-export const sendToken = (advisor, statusCode, res) => {
+export const sendToken = (advisor, statusCode, res, message) => {
   const token = advisor.generateToken();
 
   const options = {
@@ -9,7 +9,8 @@ export const sendToken = (advisor, statusCode, res) => {
   };
 
   res.status(statusCode).cookie("token", token, options).json({
-    status: "success",
+    status: true,
+    message,
     advisor,
     token,
   });

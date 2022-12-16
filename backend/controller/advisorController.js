@@ -3,6 +3,8 @@ import { asyncAwait } from "../middlewares/errorMiddleware.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import { sendToken } from "../utils/token.js";
 import { Availablity } from "../models/Availability.js";
+import { sendEmail } from "../utils/sendEmail.js";
+import crypto from "crypto";
 
 export const register = asyncAwait(async (req, res, next) => {
   const { fullName, email, password, category } = req.body;
@@ -56,7 +58,9 @@ export const login = asyncAwait(async (req, res, next) => {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
 
-  sendToken(advisor, 200, res);
+  const message = "Logged in";
+
+  sendToken(advisor, 200, res, message);
 });
 
 export const logout = asyncAwait(async (req, res, next) => {
@@ -190,4 +194,73 @@ export const deleteAvailability = asyncAwait(async (req, res) => {
       message: `You can only delete your availability`,
     });
   }
+});
+
+export const forgotPassword = asyncAwait(async (req, res, next) => {
+  const advisor = await Advisor.findOne({ email: req.body.email });
+
+  if (!advisor) {
+    return next(new ErrorHandler(`No account found with ${req.body.email}`));
+  }
+
+  const resetPasswordToken = advisor.getResetPasswordToken();
+
+  await advisor.save();
+
+  const resetUrl = `${req.protocol}://${req.get(
+    "host"
+  )}/password/reset/${resetPasswordToken}`;
+
+  const message = `Reset your password by clicking on the link below: \n\n ${resetUrl}`;
+
+  try {
+    await sendEmail({
+      email: advisor.email,
+      subject: "Reset password",
+      message,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: `Email sent to ${advisor.email}`,
+    });
+  } catch (error) {
+    advisor.resetPasswordToken = undefined;
+    advisor.resetPasswordExpire = undefined;
+    await advisor.save();
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+export const resetPassword = asyncAwait(async (req, res, next) => {
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
+
+  const advisor = await Advisor.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() },
+  });
+
+  if (!advisor) {
+    return next(new ErrorHandler("Token invalid or expired", 400));
+  }
+
+  if (req.body.password !== req.body.confirmPassword) {
+    return next(new ErrorHandler("Password does not match", 400));
+  }
+
+  advisor.password = req.body.password;
+  advisor.resetPasswordToken = undefined;
+  advisor.resetPasswordExpire = undefined;
+
+  await advisor.save();
+  const message = "Your password has been updated.";
+
+  sendToken(advisor, 200, res, message);
 });

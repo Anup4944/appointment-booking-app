@@ -10,6 +10,8 @@ import {
   advisorProfile,
   getAllAvailability,
   deleteAvailability,
+  forgotPassword,
+  resetPassword,
 } from "../controller/advisorController.js";
 import { isAuth } from "../middlewares/auth.js";
 
@@ -21,5 +23,7 @@ router.route("/open/availability").post(isAuth, openAvailiability);
 router.route("/profile").get(isAuth, advisorProfile);
 router.route("/all/availability").get(isAuth, getAllAvailability);
 router.route("/delete/available/:id").delete(isAuth, deleteAvailability);
+router.route("/forgot/password").post(forgotPassword);
+router.route("/reset/password/:token").put(resetPassword);
 
 export default router;

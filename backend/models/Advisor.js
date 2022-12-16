@@ -24,6 +24,8 @@ const advisorSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please enter your category"],
     },
+    resetPasswordToken: String,
+    resetPasswordExpire: Date,
 
     availableDatesAndTime: [
       {
@@ -68,7 +70,7 @@ advisorSchema.methods.getResetPasswordToken = function () {
     .update(resetToken)
     .digest("hex");
 
-  this.resetPaswordExpire = Date.now() + 10 * 60 * 1000;
+  this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
 
   return resetToken;
 };
