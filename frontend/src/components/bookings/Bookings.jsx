@@ -1,5 +1,6 @@
 import React from "react";
 import "../../styles/booking.scss";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 const Bookings = ({ isClient }) => {
   return (
@@ -15,6 +16,7 @@ const Bookings = ({ isClient }) => {
               <th>Date</th>
               <th>Time</th>
               <th>Booked on</th>
+              <th>Action</th>
             </tr>
 
             <tr>
@@ -23,6 +25,20 @@ const Bookings = ({ isClient }) => {
               <td>10/12/2022</td>
               <td>10AM</td>
               <td>10/12/2022 </td>
+              <td>
+                <AiFillCloseCircle />
+              </td>
+            </tr>
+
+            <tr>
+              <td>Name</td>
+              <td>name@gmail.com</td>
+              <td>10/12/2022</td>
+              <td>10AM</td>
+              <td>10/12/2022 </td>
+              <td>
+                <AiFillCloseCircle />
+              </td>
             </tr>
           </tbody>
         </table>
