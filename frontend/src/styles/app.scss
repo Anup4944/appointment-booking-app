@@ -1,5 +1,6 @@
 @import "colors";
 @import "fonts";
+@import "responsiveWidth";
 
 * {
   margin: 0%;
@@ -11,4 +12,10 @@
 .main {
   background-color: $main-backgroud;
   height: 100vh;
+}
+
+@media screen and (max-width: $extraSmall) {
+  .main {
+    // display: none;
+  }
 }

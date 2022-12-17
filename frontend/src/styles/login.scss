@@ -1,5 +1,6 @@
 @import "colors";
 @import "fonts";
+@import "responsiveWidth";
 
 .login {
   height: 85%;
@@ -67,23 +68,28 @@
         display: flex;
         flex-direction: column;
         gap: 30px;
+        position: relative;
         input {
-          border: none;
+          padding: 1vmax 4vmax;
+          padding-left: 1vmax;
+          min-width: 100%;
+          box-sizing: border-box;
+          border: 1px solid rgba(0, 0, 0, 0.267);
           outline: none;
-          border-bottom: 1px solid lightgray;
-          padding: 20px 10px;
         }
         .passHolder {
           display: flex;
           align-items: center;
-          input {
-            padding-right: 90px;
-            flex: 5;
-          }
-          svg {
-            flex: 1;
+          justify-content: center;
+
+          span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            transform: translateX(-35px);
+            font-size: 1vmax;
             cursor: pointer;
-            font-size: 25px;
           }
         }
 
@@ -96,6 +102,113 @@
           background-color: $btn-text-clr;
           color: $white;
           cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $extraSmall) {
+  .login {
+    display: block;
+    height: 100%;
+
+    .cart {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+
+      .left {
+        display: none;
+      }
+      .right {
+        height: 90%;
+        width: 90%;
+        h1 {
+          font-size: 25px;
+        }
+
+        form {
+          input {
+            padding: 20px;
+            font-size: 20px;
+          }
+          .passHolder {
+            span {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $small) {
+  .login {
+    height: 100%;
+
+    .cart {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 0 20px;
+      .left {
+        background-size: cover;
+      }
+
+      .right {
+        h1 {
+          font-size: 20px;
+        }
+
+        form {
+          input {
+            padding: 20px;
+            font-size: 20px;
+          }
+          .passHolder {
+            span {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: $large) {
+  .login {
+    height: 100%;
+
+    .cart {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 0 20px;
+      .left {
+        background-size: cover;
+      }
+
+      .right {
+        h1 {
+          font-size: 20px;
+        }
+
+        form {
+          input {
+            padding: 20px;
+            font-size: 20px;
+          }
+          .passHolder {
+            span {
+              font-size: 20px;
+            }
+          }
         }
       }
     }

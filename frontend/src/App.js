@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/app.scss";
-import { Advisor, Client, Header, Login } from "./components";
+import { Advisor, Client, Login, Header } from "./components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {

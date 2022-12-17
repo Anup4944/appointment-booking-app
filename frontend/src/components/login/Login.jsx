@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import "../../styles/login.scss";
 import { FcGoogle } from "react-icons/fc";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import {
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+  AiOutlineMail,
+} from "react-icons/ai";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -16,10 +20,18 @@ const Login = () => {
             <FcGoogle />
           </button>
         </div>
+
         <div className="right">
           <h1>Advisor Login</h1>
+
           <form>
-            <input type="text" placeholder="Email" />
+            <div className="passHolder">
+              <input type="text" placeholder="Email" />
+
+              <span>
+                <AiOutlineMail />
+              </span>
+            </div>
 
             <div className="passHolder">
               <input type={show ? "text" : "password"} placeholder="Password" />
