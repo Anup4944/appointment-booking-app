@@ -110,8 +110,7 @@
 
 @media screen and (max-width: $extraSmall) {
   .login {
-    display: block;
-    height: 100%;
+    height: 100vh;
 
     .cart {
       display: flex;

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 import { connectPassport } from "./utils/Provider.js";
 import session from "express-session";
+import cors from "cors";
 
 const app = express();
 
@@ -11,6 +12,8 @@ dotenv.config({
   path: "./config/config.env",
 });
 
+app.use(cors({ origin: true, credentials: true }));
+app.use(cookieParser());
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -18,7 +21,7 @@ app.use(
     saveUninitialized: false,
   })
 );
-app.use(cookieParser());
+
 app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
