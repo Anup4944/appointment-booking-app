@@ -4,7 +4,8 @@
 
 .advisor {
   display: flex;
-  margin-top: 1.5rem;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .openAva {
@@ -15,6 +16,7 @@
   background-color: $white;
   border-radius: 10px;
   height: 50vh;
+  max-width: 500px;
   margin: 0 1rem;
 
   .availabiltyBox {
@@ -54,6 +56,7 @@
   overflow-y: auto;
   background-color: $btn-text-clr;
   scroll-behavior: smooth;
+  max-width: 900px;
 
   .container {
     display: flex;
@@ -99,13 +102,13 @@
   .advisor {
     padding: 20px 20px;
     width: 100%;
-    height: 100%;
     flex-direction: column;
     gap: 15px;
+    margin-top: 1rem;
   }
 
   .openAva {
-    margin-top: 20px;
+    margin-top: 10px;
 
     input,
     button {

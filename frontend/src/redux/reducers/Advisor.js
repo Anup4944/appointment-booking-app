@@ -4,6 +4,7 @@ const initialState = {};
 export const advisorReducer = createReducer(initialState, {
   LoginRequest: (state) => {
     state.isLoading = true;
+    state.isAuth = false;
   },
   LoginSuccess: (state, action) => {
     state.isLoading = false;
@@ -16,47 +17,33 @@ export const advisorReducer = createReducer(initialState, {
     state.isAuth = false;
     state.error = action.payload;
   },
-
-  //   RegisterRequest: (state) => {
-  //     state.isLoading = true;
-  //   },
-  //   RegisterSuccess: (state, action) => {
-  //     state.isLoading = false;
-  //     state.user = action.payload;
-  //     state.isAuth = true;
-  //   },
-  //   RegisterFailure: (state, action) => {
-  //     state.isLoading = false;
-  //     state.error = action.payload;
-  //     state.isAuth = false;
-  //   },
-
-  //   LoadUserRequest: (state) => {
-  //     state.isLoading = true;
-  //   },
-  //   LoadUserSuccess: (state, action) => {
-  //     state.isLoading = false;
-  //     state.user = action.payload;
-  //     state.isAuth = true;
-  //   },
-  //   LoadUserFailure: (state, action) => {
-  //     state.isLoading = false;
-  //     state.error = action.payload;
-  //     state.isAuth = false;
-  //   },
-  //   logoutUserRequest: (state) => {
-  //     state.isLoading = true;
-  //   },
-  //   logoutUserSuccess: (state) => {
-  //     state.isLoading = false;
-  //     state.user = null;
-  //     state.isAuth = false;
-  //   },
-  //   logoutUserFailure: (state, action) => {
-  //     state.isLoading = false;
-  //     state.error = action.payload;
-  //     state.isAuth = true;
-  //   },
+  LoadUserRequest: (state) => {
+    state.isLoading = true;
+  },
+  LoadUserSuccess: (state, action) => {
+    state.isLoading = false;
+    state.isAuth = true;
+    state.advisor = action.payload.advisor;
+  },
+  LoadUserFailure: (state, action) => {
+    state.isLoading = false;
+    state.error = action.payload;
+    state.isAuth = false;
+  },
+  LogoutUserRequest: (state) => {
+    state.isLoading = true;
+  },
+  LogoutUserSuccess: (state, action) => {
+    state.isLoading = false;
+    state.advisor = null;
+    state.isAuth = false;
+    state.message = action.payload.message;
+  },
+  LogoutUserFailure: (state, action) => {
+    state.isLoading = false;
+    state.error = action.payload;
+    state.isAuth = true;
+  },
 
   clearErrors: (state) => {
     state.error = null;

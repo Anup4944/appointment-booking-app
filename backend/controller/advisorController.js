@@ -144,9 +144,9 @@ export const getAllAdvisor = asyncAwait(async (req, res) => {
 
 // Get advisory by cookie when reloading the page in frontend
 export const advisorProfile = asyncAwait(async (req, res) => {
-  const advisor = await Advisor.findById(req.advisor._id).populate(
-    "availableDatesAndTime"
-  );
+  const advisor = await Advisor.findById(req.advisor._id);
+
+  // console.log(advisor);
 
   res.status(200).json({ status: true, advisor });
 });

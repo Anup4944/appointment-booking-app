@@ -12,18 +12,15 @@ import { loginAction } from "../../redux/actions/Advisor";
 
 const Login = () => {
   const [show, setShow] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("apoud3l1997@gmail.com");
+  const [password, setPassword] = useState("password12345");
 
   const dispatch = useDispatch();
 
-  const { isLoading, message, error } = useSelector(
-    (state) => state.advisorReducer
-  );
+  const { message, error } = useSelector((state) => state.advisorReducer);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-
     dispatch(loginAction(email, password));
   };
 
@@ -37,6 +34,7 @@ const Login = () => {
       dispatch({ type: "clearMsg" });
     }
   }, [dispatch, message, error]);
+
   return (
     <div className="login">
       <div className="cart">
