@@ -56,3 +56,25 @@ export const logoutAction = () => async (dispatch) => {
     });
   }
 };
+
+export const openAvailability = (date, time, id) => async (dispatch) => {
+  try {
+    dispatch({ type: "openAvailabilityRequest" });
+    const { data } = await axios.post(
+      "http://localhost:4000/api/v1/open/availability",
+      { availableDate: date, time, id },
+      { withCredentials: true, credentials: "include" },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    dispatch({ type: "openAvailabilitySuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "openAvailabilityFailure",
+      payload: error.response.data.message,
+    });
+  }
+};

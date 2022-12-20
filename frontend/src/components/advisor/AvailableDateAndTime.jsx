@@ -1,79 +1,18 @@
 import React from "react";
 
-const AvailableDateAndTime = () => {
+const AvailableDateAndTime = ({ advisor }) => {
   return (
     <div className="avaDateTime">
       <div className="container">
-        <div className="card">
-          <div className="date">
-            <h4>Date : 14/10/2014</h4>
-            <h4>Time : 10AM</h4>
+        {advisor?.availableDatesAndTime.map((item, key) => (
+          <div className="card" key={item._id}>
+            <div className="dateAndTime">
+              <h4>Date : {item.availableDate}</h4>
+              <h4>Time : {item.time}</h4>
+            </div>
+            <button>Delete</button>
           </div>
-          <button>Delete</button>
-        </div>
-        <div className="card">
-          <div className="date">
-            <h4>Date : 14/10/2014</h4>
-            <h4>Time : 10AM</h4>
-          </div>
-          <button>Delete</button>
-        </div>
-        <div className="card">
-          <div className="date">
-            <h4>Date : 14/10/2014</h4>
-            <h4>Time : 10AM</h4>
-          </div>
-          <button>Delete</button>
-        </div>
-        <div className="card">
-          <div className="date">
-            <h4>Date : 14/10/2014</h4>
-            <h4>Time : 10AM</h4>
-          </div>
-          <button>Delete</button>
-        </div>
-        <div className="card">
-          <div className="date">
-            <h4>Date : 14/10/2014</h4>
-            <h4>Time : 10AM</h4>
-          </div>
-          <button>Delete</button>
-        </div>
-        <div className="card">
-          <div className="date">
-            <h4>Date : 14/10/2014</h4>
-            <h4>Time : 10AM</h4>
-          </div>
-          <button>Delete</button>
-        </div>
-        <div className="card">
-          <div className="date">
-            <h4>Date : 14/10/2014</h4>
-            <h4>Time : 10AM</h4>
-          </div>
-          <button>Delete</button>
-        </div>
-        <div className="card">
-          <div className="date">
-            <h4>Date : 14/10/2014</h4>
-            <h4>Time : 10AM</h4>
-          </div>
-          <button>Delete</button>
-        </div>
-        <div className="card">
-          <div className="date">
-            <h4>Date : 14/10/2014</h4>
-            <h4>Time : 10AM</h4>
-          </div>
-          <button>Delete</button>
-        </div>
-        <div className="card">
-          <div className="date">
-            <h4>Date : 14/10/2014</h4>
-            <h4>Time : 10AM</h4>
-          </div>
-          <button>Delete</button>
-        </div>
+        ))}
       </div>
     </div>
   );

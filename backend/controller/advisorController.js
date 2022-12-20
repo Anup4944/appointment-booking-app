@@ -80,7 +80,7 @@ export const openAvailiability = asyncAwait(async (req, res, next) => {
 
   const newAvailablityData = {
     availableDate: new Date(req.body.availableDate),
-    time: req.body.time,
+    time: req.body.time.toUpperCase(),
     lawyer: req.body.id,
   };
 
@@ -144,9 +144,9 @@ export const getAllAdvisor = asyncAwait(async (req, res) => {
 
 // Get advisory by cookie when reloading the page in frontend
 export const advisorProfile = asyncAwait(async (req, res) => {
-  const advisor = await Advisor.findById(req.advisor._id);
-
-  // console.log(advisor);
+  const advisor = await Advisor.findById(req.advisor._id).populate(
+    "availableDatesAndTime"
+  );
 
   res.status(200).json({ status: true, advisor });
 });

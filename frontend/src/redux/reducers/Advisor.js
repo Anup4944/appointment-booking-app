@@ -44,11 +44,31 @@ export const advisorReducer = createReducer(initialState, {
     state.error = action.payload;
     state.isAuth = true;
   },
-
   clearErrors: (state) => {
     state.error = null;
   },
   clearMsg: (state) => {
     state.message = null;
+  },
+});
+
+export const availabilityReducer = createReducer(initialState, {
+  openAvailabilityRequest: (state) => {
+    state.isLoading = true;
+  },
+  openAvailabilitySuccess: (state, action) => {
+    state.isLoading = false;
+    state.message = action.payload.message;
+    state.yourAvailability = action.payload.availablity;
+  },
+  openAvailabilityFailure: (state, action) => {
+    state.isLoading = false;
+    state.message = action.payload;
+  },
+  clearMsg: (state) => {
+    state.message = null;
+  },
+  clearErrors: (state) => {
+    state.error = null;
   },
 });

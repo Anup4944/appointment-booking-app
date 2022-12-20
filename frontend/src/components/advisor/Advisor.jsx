@@ -31,8 +31,8 @@ const Advisor = () => {
     <>
       <div className="advisor">
         <Toaster position="top-center" reverseOrder={false} />
-        <OpenAvailiabiltiy />
-        <AvailableDateAndTime />
+        <OpenAvailiabiltiy id={advisor._id} />
+        <AvailableDateAndTime advisor={advisor} />
       </div>
       <Bookings />
     </>

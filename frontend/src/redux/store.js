@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { advisorReducer } from "./reducers/Advisor";
+import { advisorReducer, availabilityReducer } from "./reducers/Advisor";
 
 const store = configureStore({
-  reducer: { advisorReducer },
+  reducer: { advisorReducer, availabilityReducer },
 });
 
 export default store;
