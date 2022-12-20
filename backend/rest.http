@@ -35,7 +35,7 @@ POST http://localhost:4000/api/v1/open/availability
 Content-Type: application/json
 
 {
-    "id":"6392c01f4c45797b3d6ff4a8",
+    "id":"639bc7058b33b6bdaf23dddd",
     "time":"5AM",
     "availableDate":"2023-01-20"
 }

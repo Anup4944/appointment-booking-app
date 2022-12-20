@@ -6,7 +6,7 @@ import {
   AiOutlineEyeInvisible,
   AiOutlineMail,
 } from "react-icons/ai";
-
+import toast, { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../redux/actions/Advisor";
 
@@ -26,17 +26,40 @@ const Login = () => {
 
   useEffect(() => {
     if (error) {
-      alert(error);
+      toast.error(error, {
+        icon: "❌",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          borderRadius: "10px",
+        },
+      });
       dispatch({ type: "clearErrors" });
     }
     if (message) {
-      alert(message);
+      toast.success(message, {
+        icon: "✅",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          borderRadius: "10px",
+        },
+      });
       dispatch({ type: "clearMsg" });
     }
   }, [dispatch, message, error]);
 
   return (
     <div className="login">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="cart">
         <div className="left">
           <h1>Hello World.</h1>

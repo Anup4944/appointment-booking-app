@@ -48,7 +48,7 @@ export const logoutAction = () => async (dispatch) => {
       credentials: "include",
     });
 
-    dispatch({ type: "LogoutUserSuccess", payload: data.message });
+    dispatch({ type: "LogoutUserSuccess", payload: data });
   } catch (error) {
     dispatch({
       type: "LogoutUserFailure",

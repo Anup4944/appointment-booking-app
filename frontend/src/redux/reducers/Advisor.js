@@ -35,9 +35,9 @@ export const advisorReducer = createReducer(initialState, {
   },
   LogoutUserSuccess: (state, action) => {
     state.isLoading = false;
-    state.advisor = null;
     state.isAuth = false;
     state.message = action.payload.message;
+    state.advisor = null;
   },
   LogoutUserFailure: (state, action) => {
     state.isLoading = false;

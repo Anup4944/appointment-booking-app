@@ -5,13 +5,10 @@ import { logoutAction } from "../redux/actions/Advisor";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { isAuth, advisor, message } = useSelector(
-    (state) => state.advisorReducer
-  );
+  const { isAuth, advisor } = useSelector((state) => state.advisorReducer);
 
-  const logoutHandler = async () => {
-    await dispatch(logoutAction());
-    // alert(message);
+  const logoutHandler = () => {
+    dispatch(logoutAction());
   };
   return (
     <div className="headerBar">
