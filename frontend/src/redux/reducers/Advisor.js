@@ -63,7 +63,18 @@ export const availabilityReducer = createReducer(initialState, {
   },
   openAvailabilityFailure: (state, action) => {
     state.isLoading = false;
-    state.message = action.payload;
+    state.error = action.payload;
+  },
+  deleteAvailabilityRequest: (state) => {
+    state.isLoading = true;
+  },
+  deleteAvailabilitySuccess: (state, action) => {
+    state.isLoading = false;
+    state.message = action.payload.message;
+  },
+  deleteAvailabilityFailure: (state, action) => {
+    state.isLoading = false;
+    state.error = action.payload;
   },
   clearMsg: (state) => {
     state.message = null;

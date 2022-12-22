@@ -14,7 +14,7 @@ const OpenAvailiabiltiy = ({ id }) => {
 
   const disableButton = !date || !time;
 
-  const { message } = useSelector((state) => state.availabilityReducer);
+  const { message, error } = useSelector((state) => state.availabilityReducer);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +38,22 @@ const OpenAvailiabiltiy = ({ id }) => {
       });
       dispatch({ type: "clearMsg" });
     }
-  }, [dispatch, message]);
+    if (error) {
+      toast(error, {
+        icon: "❌",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          borderRadius: "10px",
+        },
+      });
+      dispatch({ type: "clearErrors" });
+    }
+  }, [dispatch, message, error]);
   return (
     <div className="openAva">
       <Toaster position="top-center" reverseOrder={false} />

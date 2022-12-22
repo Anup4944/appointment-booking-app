@@ -78,3 +78,28 @@ export const openAvailability = (date, time, id) => async (dispatch) => {
     });
   }
 };
+
+// Delete availaibility by lawyer
+export const deleteAvailability = (availabilityId) => async (dispatch) => {
+  try {
+    dispatch({ type: "deleteAvailabilityRequest" });
+    const { data } = await axios.delete(
+      `http://localhost:4000/api/v1/delete/available/${availabilityId}`,
+
+      { withCredentials: true, credentials: "include" },
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    dispatch({ type: "deleteAvailabilitySuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "deleteAvailabilityFailure",
+      payload: error.response.data.message,
+    });
+  }
+};

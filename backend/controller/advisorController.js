@@ -90,19 +90,18 @@ export const openAvailiability = asyncAwait(async (req, res, next) => {
     );
   }
 
-  const foundItem = availableDate.find(
-    (item) =>
-      item.time === req.body.time &&
-      item.availableDate.toString() ===
-        new Date(req.body.availableDate).toString()
-  );
+  const dublicateDate = await Availablity.findOne({
+    availableDate: new Date(req.body.availableDate),
+    time: req.body.time.toUpperCase(),
+    lawyer: req.body.id,
+  });
 
-  if (foundItem) {
+  if (dublicateDate) {
     return res.status(401).json({
       success: false,
-      message: `Your availablity for ${new Date(req.body.availableDate)}  at ${
-        req.body.time
-      } has already been added. You cannot add same time availability twice`,
+      message: `Your availablity for ${new Date(
+        req.body.availableDate
+      )}  at ${req.body.time.toUpperCase()} has already been added. You cannot add same time availability twice`,
     });
   }
 
