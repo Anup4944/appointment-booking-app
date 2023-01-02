@@ -4,13 +4,16 @@ import { Advisor, Client, Login, Header } from "./components";
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { loadAdvisorAction } from "./redux/actions/Advisor";
+import { loadClientAction } from "./redux/actions/Client";
 
 const App = () => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector((state) => state.advisorReducer);
+  const { isAuthenticated } = useSelector((state) => state.clientReducer);
 
   useEffect(() => {
     dispatch(loadAdvisorAction());
+    dispatch(loadClientAction());
   }, [dispatch]);
 
   return (

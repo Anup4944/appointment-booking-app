@@ -12,22 +12,13 @@ router.get(
   })
 );
 
-router.get(
-  "/login",
-  passport.authenticate("google", {
-    scope: ["profile"],
-    successRedirect: process.env.FRONTEND_URL,
-  }),
-  (req, res, next) => {
-    res.send("Logged In");
-  }
-);
+router.get("/login/acc", passport.authenticate("google"), (req, res) => {
+  res.redirect(process.env.FRONTEND_URL);
+});
 
-// router.get("/login", passport.authenticate("google"), (req, res, next) => {
-//   res.send("Logged In");
-// });
+router.get("/google/profile", isAuthenticated, myProfile);
 
-router.get("/me", isAuthenticated, myProfile);
-router.get("/google/logout", isAuthenticated, logout);
+// router.get("/me", isAuthenticated, myProfile);
+router.get("/google/logout", logout);
 
 export default router;

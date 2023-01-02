@@ -22,7 +22,9 @@ export const connectPassport = () => {
             name: profile.displayName,
             photo: profile.photos[0].value,
             googleId: profile.id,
+            email: profile.emails,
           });
+
           return done(null, newUser);
         } else {
           return done(null, user);

@@ -33,7 +33,6 @@ app.use(
     extended: true,
   })
 );
-
 // Import routes
 
 import advisorRouter from "./routes/advisorRoute.js";

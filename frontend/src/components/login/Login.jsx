@@ -12,8 +12,8 @@ import { loginAction } from "../../redux/actions/Advisor";
 
 const Login = () => {
   const [show, setShow] = useState(false);
-  const [email, setEmail] = useState("apoud3l1997@gmail.com");
-  const [password, setPassword] = useState("password12345");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
 
@@ -57,6 +57,10 @@ const Login = () => {
     }
   }, [dispatch, message, error]);
 
+  const handleOnLogin = () => {
+    window.open(`http://localhost:4000/api/v1/google/login`, "_self");
+  };
+
   return (
     <div className="login">
       <Toaster position="top-center" reverseOrder={false} />
@@ -64,7 +68,7 @@ const Login = () => {
         <div className="left">
           <h1>Hello World.</h1>
           <p>Book an appoinment with best lawyers!</p>
-          <button>
+          <button onClick={handleOnLogin}>
             Login with
             <FcGoogle />
           </button>
