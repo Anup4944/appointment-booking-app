@@ -103,3 +103,27 @@ export const deleteAvailability = (availabilityId) => async (dispatch) => {
     });
   }
 };
+
+export const getAllAvailability = () => async (dispatch) => {
+  try {
+    dispatch({ type: "allAvailabilityRequest" });
+    const { data } = await axios.get(
+      `http://localhost:4000/api/v1/all/availability`,
+
+      { withCredentials: true, credentials: "include" },
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    dispatch({ type: "allAvailabilitySuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "allAvailabilityFailure",
+      payload: error.response.data.message,
+    });
+  }
+};

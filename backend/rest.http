@@ -6,7 +6,7 @@ Content-Type: application/json
 
 {
     "fullName":"Anup Poudel",
-    "email":"apoud3l1997@gmail.com",
+    "email":"ap@gmail.com",
     "password":"password123",
     "category":"Criminal"
 }

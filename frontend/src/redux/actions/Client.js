@@ -16,7 +16,6 @@ export const loadClientAction = () => async (dispatch) => {
         },
       }
     );
-    console.log("From Google", data);
     dispatch({
       type: "LoadClientSuccess",
       payload: data.user,
@@ -24,6 +23,34 @@ export const loadClientAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "LoadClientFailure",
+      payload: error.response.data.message,
+    });
+  }
+};
+export const logoutClientAction = () => async (dispatch) => {
+  try {
+    dispatch({ type: "LogoutClientRequest" });
+
+    const { data } = await axios.get(
+      "http://localhost:4000/api/v1/google/profile",
+      {
+        withCredentials: true,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      }
+    );
+
+    console.log("FROM LOGOUT", data);
+    dispatch({
+      type: "LogoutClientSuccess",
+    });
+  } catch (error) {
+    dispatch({
+      type: "LogoutClientFailure",
       payload: error.response.data.message,
     });
   }

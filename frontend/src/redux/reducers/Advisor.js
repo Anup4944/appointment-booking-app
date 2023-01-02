@@ -83,3 +83,23 @@ export const availabilityReducer = createReducer(initialState, {
     state.error = null;
   },
 });
+export const allAvailabilityReducer = createReducer(initialState, {
+  allAvailabilityRequest: (state) => {
+    state.isLoading = true;
+  },
+  allAvailabilitySuccess: (state, action) => {
+    state.isLoading = false;
+    state.message = action.payload.message;
+    state.allAvailability = action.payload.allAvailability;
+  },
+  allAvailabilityFailure: (state, action) => {
+    state.isLoading = false;
+    state.error = action.payload;
+  },
+  clearMsg: (state) => {
+    state.message = null;
+  },
+  clearErrors: (state) => {
+    state.error = null;
+  },
+});

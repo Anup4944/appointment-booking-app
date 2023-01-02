@@ -15,20 +15,19 @@ export const clientReducer = createReducer(initialState, {
     state.error = action.payload;
     state.isAuthenticated = false;
   },
-  //   LogoutUserRequest: (state) => {
-  //     state.isLoading = true;
-  //   },
-  //   LogoutUserSuccess: (state, action) => {
-  //     state.isLoading = false;
-  //     state.isAuth = false;
-  //     state.message = action.payload.message;
-  //     state.advisor = null;
-  //   },
-  //   LogoutUserFailure: (state, action) => {
-  //     state.isLoading = false;
-  //     state.error = action.payload;
-  //     state.isAuth = true;
-  //   },
+  LogoutClientRequest: (state) => {
+    state.isLoading = true;
+  },
+  LogoutClientSuccess: (state) => {
+    state.isLoading = false;
+    state.isAuthenticated = false;
+    state.client = null;
+  },
+  LogoutClientFailure: (state, action) => {
+    state.isLoading = false;
+    state.error = action.payload;
+    state.isAuthenticated = true;
+  },
   clearErrors: (state) => {
     state.error = null;
   },

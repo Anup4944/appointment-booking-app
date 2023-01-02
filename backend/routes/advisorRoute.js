@@ -21,7 +21,7 @@ router.route("/logout").get(isAuth, logout);
 router.route("/all").get(getAllAdvisor);
 router.route("/open/availability").post(isAuth, openAvailiability);
 router.route("/profile").get(isAuth, advisorProfile);
-router.route("/all/availability").get(isAuth, getAllAvailability);
+router.route("/all/availability").get(getAllAvailability);
 router.route("/delete/available/:id").delete(isAuth, deleteAvailability);
 router.route("/forgot/password").post(forgotPassword);
 router.route("/reset/password/:token").put(resetPassword);

@@ -12,7 +12,6 @@ export const connectPassport = () => {
       },
       async function (accessToken, refreshToken, profile, done) {
         // Database connection
-
         const user = await User.findOne({
           googleId: profile.id,
         }).populate("futureBookings");
@@ -22,7 +21,7 @@ export const connectPassport = () => {
             name: profile.displayName,
             photo: profile.photos[0].value,
             googleId: profile.id,
-            email: profile.emails,
+            email: profile.emails[0].value,
           });
 
           return done(null, newUser);

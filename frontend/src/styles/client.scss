@@ -3,10 +3,10 @@
 
 .mainCart {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   margin: 2rem auto;
   flex-wrap: wrap;
-  height: 50vh;
+  min-height: 30vh;
   overflow-y: auto;
 
   .bookingCard {

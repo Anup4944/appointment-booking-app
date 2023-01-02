@@ -22,7 +22,10 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={isAuth ? <Advisor /> : <Login />} />
-          <Route path="/client/home" element={<Client />} />
+          <Route
+            path="/client/home"
+            element={isAuthenticated ? <Client /> : <Login />}
+          />
         </Routes>
       </div>
     </Router>

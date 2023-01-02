@@ -1,129 +1,21 @@
 import React from "react";
 
-const BookingCart = () => {
+const BookingCart = ({ message, allAva }) => {
   return (
     <div className="mainCart">
-      {" "}
-      <div className="bookingCard">
-        <ul>
-          <li> Available Date : 10/12/2022</li>
-          <li> Time: 10AM</li>
-          <li> Lawyer's name: James Maddison</li>
-          <li> Email: lawyer@gmail.com</li>
-          <li> Category: Criminal</li>
-        </ul>
-        <button>Book</button>
-      </div>
-      <div className="bookingCard">
-        <ul>
-          <li> Available Date : 10/12/2022</li>
-          <li> Time: 10AM</li>
-          <li> Lawyer's name: James Maddison</li>
-          <li> Email: lawyer@gmail.com</li>
-          <li> Category: Criminal</li>
-        </ul>
-        <button>Book</button>
-      </div>
-      <div className="bookingCard">
-        <ul>
-          <li> Available Date : 10/12/2022</li>
-          <li> Time: 10AM</li>
-          <li> Lawyer's name: James Maddison</li>
-          <li> Email: lawyer@gmail.com</li>
-          <li> Category: Criminal</li>
-        </ul>
-        <button>Book</button>
-      </div>
-      <div className="bookingCard">
-        <ul>
-          <li> Available Date : 10/12/2022</li>
-          <li> Time: 10AM</li>
-          <li> Lawyer's name: James Maddison</li>
-          <li> Email: lawyer@gmail.com</li>
-          <li> Category: Criminal</li>
-        </ul>
-        <button>Book</button>
-      </div>
-      <div className="bookingCard">
-        <ul>
-          <li> Available Date : 10/12/2022</li>
-          <li> Time: 10AM</li>
-          <li> Lawyer's name: James Maddison</li>
-          <li> Email: lawyer@gmail.com</li>
-          <li> Category: Criminal</li>
-        </ul>
-        <button>Book</button>
-      </div>
-      <div className="bookingCard">
-        <ul>
-          <li> Available Date : 10/12/2022</li>
-          <li> Time: 10AM</li>
-          <li> Lawyer's name: James Maddison</li>
-          <li> Email: lawyer@gmail.com</li>
-          <li> Category: Criminal</li>
-        </ul>
-        <button>Book</button>
-      </div>
-      <div className="bookingCard">
-        <ul>
-          <li> Available Date : 10/12/2022</li>
-          <li> Time: 10AM</li>
-          <li> Lawyer's name: James Maddison</li>
-          <li> Email: lawyer@gmail.com</li>
-          <li> Category: Criminal</li>
-        </ul>
-        <button>Book</button>
-      </div>
-      <div className="bookingCard">
-        <ul>
-          <li> Available Date : 10/12/2022</li>
-          <li> Time: 10AM</li>
-          <li> Lawyer's name: James Maddison</li>
-          <li> Email: lawyer@gmail.com</li>
-          <li> Category: Criminal</li>
-        </ul>
-        <button>Book</button>
-      </div>
-      <div className="bookingCard">
-        <ul>
-          <li> Available Date : 10/12/2022</li>
-          <li> Time: 10AM</li>
-          <li> Lawyer's name: James Maddison</li>
-          <li> Email: lawyer@gmail.com</li>
-          <li> Category: Criminal</li>
-        </ul>
-        <button>Book</button>
-      </div>
-      <div className="bookingCard">
-        <ul>
-          <li> Available Date : 10/12/2022</li>
-          <li> Time: 10AM</li>
-          <li> Lawyer's name: James Maddison</li>
-          <li> Email: lawyer@gmail.com</li>
-          <li> Category: Criminal</li>
-        </ul>
-        <button>Book</button>
-      </div>
-      <div className="bookingCard">
-        <ul>
-          <li> Available Date : 10/12/2022</li>
-          <li> Time: 10AM</li>
-          <li> Lawyer's name: James Maddison</li>
-          <li> Email: lawyer@gmail.com</li>
-          <li> Category: Criminal</li>
-        </ul>
-        <button>Book</button>
-      </div>
-      <div className="bookingCard">
-        <ul>
-          <li> Available Date : 10/12/2022</li>
-          <li> Time: 10AM</li>
-          <li> Lawyer's name: James Maddison</li>
-          <li> Email: lawyer@gmail.com</li>
-          <li> Category: Criminal</li>
-        </ul>
-        <button>Book</button>
-      </div>
+      {/* <h1>{message}</h1>{" "} */}
+      {allAva?.map((item, key) => (
+        <div className="bookingCard">
+          <ul>
+            <li> Available Date :{item.availableDate}</li>
+            <li> Time: {item.time}</li>
+            <li> Lawyer's name: {item.lawyer.fullName}</li>
+            <li> Email: {item.lawyer.email}</li>
+            <li> Category: {item.lawyer.category}</li>
+          </ul>
+          <button>Book</button>
+        </div>
+      ))}
     </div>
   );
 };
