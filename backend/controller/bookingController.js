@@ -76,20 +76,18 @@ export const allBookings = asyncAwait(async (req, res, next) => {
 });
 
 // Get bookings by user Id
-export const getBookingByUserId = asyncAwait(async (req, res, next) => {
-  const user = "639852f319b23d396ebd9eea";
+export const getBookingById = asyncAwait(async (req, res, next) => {
+  const id = req.params;
 
-  const bookingByUserId = await Bookings.find({
-    user,
+  const bookingById = await Bookings.find({
+    id,
   });
 
-  if (bookingByUserId.length <= 0) {
+  if (bookingById.length <= 0) {
     return next(new ErrorHandler("You have not made any bookings yet"));
   }
 
-  res
-    .status(200)
-    .json({ status: true, message: "Your upcoming bookings", bookingByUserId });
+  res.status(200).json({ status: true, bookingById });
 });
 
 // Delete booking by Advisor Id

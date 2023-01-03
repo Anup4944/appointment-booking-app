@@ -7,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 const BookingCart = ({ client }) => {
   const dispatch = useDispatch();
 
-  const { message, allAvailability } = useSelector(
+  const { allAvailability, error } = useSelector(
     (state) => state.allAvailabilityReducer
   );
 
@@ -38,33 +38,36 @@ const BookingCart = ({ client }) => {
   return (
     <div className="mainCart">
       <Toaster position="top-center" reverseOrder={false} />
-
-      {allAvailability?.map((item, key) => (
-        <div className="bookingCard" key={item._id}>
-          <ul>
-            <li> Available Date :{item.availableDate}</li>
-            <li> Time: {item.time}</li>
-            <li> Lawyer's name: {item.lawyer.fullName}</li>
-            <li> Email: {item.lawyer.email}</li>
-            <li> Category: {item.lawyer.category}</li>
-          </ul>
-          <button
-            onClick={async () => {
-              await dispatch(
-                bookAppointmentAction(
-                  item.availableDate,
-                  item.time,
-                  item.lawyer._id,
-                  client._id
-                )
-              );
-              await dispatch(getAllAvailability());
-            }}
-          >
-            Book
-          </button>
-        </div>
-      ))}
+      {!allAvailability ? (
+        <h3 className="errClass">{error}</h3>
+      ) : (
+        allAvailability?.map((item, key) => (
+          <div className="bookingCard" key={item._id}>
+            <ul>
+              <li> Available Date :{item.availableDate}</li>
+              <li> Time: {item.time}</li>
+              <li> Lawyer's name: {item.lawyer.fullName}</li>
+              <li> Email: {item.lawyer.email}</li>
+              <li> Category: {item.lawyer.category}</li>
+            </ul>
+            <button
+              onClick={async () => {
+                await dispatch(
+                  bookAppointmentAction(
+                    item.availableDate,
+                    item.time,
+                    item.lawyer._id,
+                    client._id
+                  )
+                );
+                await dispatch(getAllAvailability());
+              }}
+            >
+              Book
+            </button>
+          </div>
+        ))
+      )}
     </div>
   );
 };

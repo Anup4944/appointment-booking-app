@@ -94,6 +94,7 @@ export const allAvailabilityReducer = createReducer(initialState, {
   },
   allAvailabilityFailure: (state, action) => {
     state.isLoading = false;
+    state.allAvailability = action.payload.allAvailability;
     state.error = action.payload;
   },
   clearMsg: (state) => {

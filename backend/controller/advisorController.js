@@ -156,6 +156,7 @@ export const getAllAvailability = asyncAwait(async (req, res) => {
   if (allAvailability.length < 1) {
     return res.status(400).json({
       success: false,
+      allAvailability,
       message: "No dates available at the moment",
     });
   }
