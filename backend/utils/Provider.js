@@ -14,7 +14,9 @@ export const connectPassport = () => {
         // Database connection
         const user = await User.findOne({
           googleId: profile.id,
-        }).populate("futureBookings");
+        });
+
+        // console.log(user);
 
         if (!user) {
           const newUser = await User.create({

@@ -2,24 +2,15 @@ import React, { useEffect } from "react";
 import BookingCart from "./BookingCart";
 import Bookings from "../bookings/Bookings";
 import "../../styles/client.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllAvailability } from "../../redux/actions/Advisor";
+import { useSelector } from "react-redux";
 
 const Client = () => {
-  const dispatch = useDispatch();
-
-  const { message, allAvailability } = useSelector(
-    (state) => state.allAvailabilityReducer
-  );
-
-  useEffect(() => {
-    dispatch(getAllAvailability());
-  }, [dispatch]);
+  const { client } = useSelector((state) => state.clientReducer);
 
   return (
     <>
-      <BookingCart message={message} allAva={allAvailability} />
-      <Bookings isClient />
+      <BookingCart client={client} />
+      <Bookings isClient client={client} />
     </>
   );
 };

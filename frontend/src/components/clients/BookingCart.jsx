@@ -1,11 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { bookAppointmentAction } from "../../redux/actions/Booking";
+import { getAllAvailability } from "../../redux/actions/Advisor";
+import toast, { Toaster } from "react-hot-toast";
 
-const BookingCart = ({ message, allAva }) => {
+const BookingCart = ({ client }) => {
+  const dispatch = useDispatch();
+
+  const { message, allAvailability } = useSelector(
+    (state) => state.allAvailabilityReducer
+  );
+
+  const { message: bookedMsg } = useSelector((state) => state.bookingReducer);
+
+  useEffect(() => {
+    dispatch(getAllAvailability());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (bookedMsg) {
+      toast(bookedMsg, {
+        icon: "✅",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          borderRadius: "10px",
+        },
+      });
+      dispatch({ type: "clearMsg" });
+    }
+  }, [bookedMsg]);
+
   return (
     <div className="mainCart">
-      {/* <h1>{message}</h1>{" "} */}
-      {allAva?.map((item, key) => (
-        <div className="bookingCard">
+      <Toaster position="top-center" reverseOrder={false} />
+
+      {allAvailability?.map((item, key) => (
+        <div className="bookingCard" key={item._id}>
           <ul>
             <li> Available Date :{item.availableDate}</li>
             <li> Time: {item.time}</li>
@@ -13,7 +48,21 @@ const BookingCart = ({ message, allAva }) => {
             <li> Email: {item.lawyer.email}</li>
             <li> Category: {item.lawyer.category}</li>
           </ul>
-          <button>Book</button>
+          <button
+            onClick={async () => {
+              await dispatch(
+                bookAppointmentAction(
+                  item.availableDate,
+                  item.time,
+                  item.lawyer._id,
+                  client._id
+                )
+              );
+              await dispatch(getAllAvailability());
+            }}
+          >
+            Book
+          </button>
         </div>
       ))}
     </div>

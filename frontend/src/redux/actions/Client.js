@@ -31,8 +31,8 @@ export const logoutClientAction = () => async (dispatch) => {
   try {
     dispatch({ type: "LogoutClientRequest" });
 
-    const { data } = await axios.get(
-      "http://localhost:4000/api/v1/google/profile",
+    await axios.get(
+      "http://localhost:4000/api/v1/google/logout",
       {
         withCredentials: true,
       },
@@ -44,7 +44,6 @@ export const logoutClientAction = () => async (dispatch) => {
       }
     );
 
-    console.log("FROM LOGOUT", data);
     dispatch({
       type: "LogoutClientSuccess",
     });

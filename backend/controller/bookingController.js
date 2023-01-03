@@ -11,13 +11,14 @@ export const bookAppointment = asyncAwait(async (req, res, next) => {
 
   // find advisor and user
   const advisor = await Advisor.findById(lawyer);
+
   const user = await User.findById(userId);
 
   // find availability
   const findAvailability = await Availablity.findOne({
     availableDate: new Date(availableDate),
     time: time,
-    lawyer: lawyer.toString(),
+    lawyer: lawyer,
   });
 
   if (!findAvailability) {

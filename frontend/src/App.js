@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { loadAdvisorAction } from "./redux/actions/Advisor";
 import { loadClientAction } from "./redux/actions/Client";
+// import { ProtectedRoute } from "protected-route-react";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,10 +23,8 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={isAuth ? <Advisor /> : <Login />} />
-          <Route
-            path="/client/home"
-            element={isAuthenticated ? <Client /> : <Login />}
-          />
+
+          <Route path="/client/home" element={<Client />} />
         </Routes>
       </div>
     </Router>
