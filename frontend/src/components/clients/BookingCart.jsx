@@ -33,7 +33,7 @@ const BookingCart = ({ client }) => {
       });
       dispatch({ type: "clearMsg" });
     }
-  }, [bookedMsg]);
+  }, [dispatch, bookedMsg]);
 
   return (
     <div className="mainCart">
@@ -57,6 +57,8 @@ const BookingCart = ({ client }) => {
                     item.availableDate,
                     item.time,
                     item.lawyer._id,
+                    item.lawyer.fullName,
+                    client.name,
                     client._id
                   )
                 );

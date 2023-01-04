@@ -7,7 +7,8 @@ import { Bookings } from "../models/Bookings.js";
 
 // Save bookings
 export const bookAppointment = asyncAwait(async (req, res, next) => {
-  const { availableDate, time, lawyer, userId } = req.body;
+  const { availableDate, time, lawyer, lawyerName, userName, userId } =
+    req.body;
 
   // find advisor and user
   const advisor = await Advisor.findById(lawyer);
@@ -29,6 +30,8 @@ export const bookAppointment = asyncAwait(async (req, res, next) => {
     bookedDate: new Date(availableDate),
     time,
     lawyer,
+    lawyerName,
+    userName,
     user,
   };
 

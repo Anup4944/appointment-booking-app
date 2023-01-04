@@ -14,6 +14,14 @@ const bookingSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Advisor",
     },
+    lawyerName: {
+      type: String,
+      required: [true, "Please enter your available time"],
+    },
+    userName: {
+      type: String,
+      required: [true, "Please enter your available time"],
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

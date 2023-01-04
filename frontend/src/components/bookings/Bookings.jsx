@@ -6,20 +6,19 @@ const Bookings = ({ isClient, client }) => {
   return (
     <div className="bookingContainer">
       <h4 className="bookingHeader">Your upcoming bookings</h4>
-      {client?.futureBookings.map((item, key) => (
-        <div className="tableContainer" key={item._id}>
-          <table>
-            <tbody>
-              <tr>
-                {isClient ? <th>Lawyer Name</th> : <th>Client Name</th>}
-                <th>Email</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Booked on</th>
-                <th>Action</th>
-              </tr>
-
-              <tr>
+      <div className="tableContainer">
+        <table>
+          <tbody>
+            <tr>
+              {isClient ? <th>Lawyer Name</th> : <th>Client Name</th>}
+              <th>Email</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Booked on</th>
+              <th>Action</th>
+            </tr>
+            {client?.futureBookings.map((item, key) => (
+              <tr key={item}>
                 <td>Name</td>
                 <td>name@gmail.com</td>
                 <td>10/12/2022</td>
@@ -29,10 +28,10 @@ const Bookings = ({ isClient, client }) => {
                   <AiFillCloseCircle />
                 </td>
               </tr>
-            </tbody>
-          </table>
-        </div>
-      ))}
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

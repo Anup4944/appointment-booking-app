@@ -1,13 +1,14 @@
 import axios from "axios";
 
 export const bookAppointmentAction =
-  (availableDate, time, lawyer, userId) => async (dispatch) => {
+  (availableDate, time, lawyer, lawyerName, userName, userId) =>
+  async (dispatch) => {
     try {
       dispatch({ type: "BookingRequest" });
 
       const { data } = await axios.post(
         "http://localhost:4000/api/v1/booking",
-        { availableDate, time, lawyer, userId },
+        { availableDate, time, lawyer, lawyerName, userName, userId },
         { withCredentials: true, credentials: "include" },
         {
           headers: {
