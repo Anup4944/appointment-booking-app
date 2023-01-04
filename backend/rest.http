@@ -5,8 +5,8 @@ POST http://localhost:4000/api/v1/register
 Content-Type: application/json
 
 {
-    "fullName":"Anup Poudel",
-    "email":"ap@gmail.com",
+    "fullName":"Johm Smith",
+    "email":"js@gmail.com",
     "password":"password123",
     "category":"Criminal"
 }

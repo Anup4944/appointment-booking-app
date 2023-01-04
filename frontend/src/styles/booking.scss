@@ -24,26 +24,32 @@ table {
   position: relative;
   border-collapse: collapse;
   background-color: #f6f6f6;
-}
+  td,
+  th {
+    border: 1px solid #999;
+    padding: 20px;
+    text-align: center;
+    svg {
+      height: 2rem;
+      width: 4rem;
+      cursor: pointer;
+    }
+  }
 
-td,
-th {
-  border: 1px solid #999;
-  padding: 20px;
-}
-th {
-  background: $headerColor;
-  color: white;
-  border-radius: 0;
-  position: sticky;
-  top: 0;
-  padding: 10px;
-}
+  th {
+    background: $headerColor;
+    color: white;
+    border-radius: 0;
+    position: sticky;
+    top: 0;
+    padding: 10px;
+  }
 
-tfoot > tr {
-  background: $main-backgroud;
-  color: $white;
-}
-tbody > tr:hover {
-  background-color: $main-backgroud;
+  tfoot > tr {
+    background: $main-backgroud;
+    color: $white;
+  }
+  tbody > tr:hover {
+    background-color: $main-backgroud;
+  }
 }

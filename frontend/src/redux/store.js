@@ -5,7 +5,7 @@ import {
   allAvailabilityReducer,
 } from "./reducers/Advisor";
 import { clientReducer } from "./reducers/Client";
-import { bookingReducer } from "./reducers/Bookings";
+import { bookingReducer, bookingByIdReducer } from "./reducers/Bookings";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +14,7 @@ const store = configureStore({
     clientReducer,
     allAvailabilityReducer,
     bookingReducer,
+    bookingByIdReducer,
   },
 });
 

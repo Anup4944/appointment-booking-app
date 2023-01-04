@@ -1,8 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { bookAppointmentAction } from "../../redux/actions/Booking";
+import {
+  bookAppointmentAction,
+  getBookingsById,
+} from "../../redux/actions/Booking";
 import { getAllAvailability } from "../../redux/actions/Advisor";
 import toast, { Toaster } from "react-hot-toast";
+import { formatDate } from "../../utils/formatDate";
 
 const BookingCart = ({ client }) => {
   const dispatch = useDispatch();
@@ -44,7 +48,7 @@ const BookingCart = ({ client }) => {
         allAvailability?.map((item, key) => (
           <div className="bookingCard" key={item._id}>
             <ul>
-              <li> Available Date :{item.availableDate}</li>
+              <li> Available Date :{formatDate(item.availableDate)}</li>
               <li> Time: {item.time}</li>
               <li> Lawyer's name: {item.lawyer.fullName}</li>
               <li> Email: {item.lawyer.email}</li>
@@ -58,11 +62,14 @@ const BookingCart = ({ client }) => {
                     item.time,
                     item.lawyer._id,
                     item.lawyer.fullName,
+                    item.lawyer.email,
+                    client.email,
                     client.name,
                     client._id
                   )
                 );
                 await dispatch(getAllAvailability());
+                dispatch(getBookingsById(client._id));
               }}
             >
               Book

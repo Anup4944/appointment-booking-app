@@ -1,14 +1,32 @@
 import axios from "axios";
 
 export const bookAppointmentAction =
-  (availableDate, time, lawyer, lawyerName, userName, userId) =>
+  (
+    availableDate,
+    time,
+    lawyer,
+    lawyerName,
+    lawyerEmail,
+    userEmail,
+    userName,
+    userId
+  ) =>
   async (dispatch) => {
     try {
       dispatch({ type: "BookingRequest" });
 
       const { data } = await axios.post(
         "http://localhost:4000/api/v1/booking",
-        { availableDate, time, lawyer, lawyerName, userName, userId },
+        {
+          availableDate,
+          time,
+          lawyer,
+          lawyerName,
+          lawyerEmail,
+          userEmail,
+          userName,
+          userId,
+        },
         { withCredentials: true, credentials: "include" },
         {
           headers: {
@@ -21,6 +39,74 @@ export const bookAppointmentAction =
     } catch (error) {
       dispatch({
         type: "BookingFailure",
+        payload: error.response.data.message,
+      });
+    }
+  };
+export const getBookingsById = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "BookingByIdRequest" });
+
+    const { data } = await axios.get(
+      `http://localhost:4000/api/v1/booking/${id}`,
+
+      { withCredentials: true, credentials: "include" },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    dispatch({ type: "BookingByIdSuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "BookingByIdFailure",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const deleteBookingByAdvisorAction =
+  (
+    id,
+    time,
+    bookedDate,
+    lawyerName,
+    lawyerEmail,
+    userEmail,
+    userName,
+    userId
+  ) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: "DeleteBookingByAdvisorRequest",
+      });
+
+      const { data } = await axios.delete(
+        `http://localhost:4000/api/v1/delete/advisor/booking/${id}`,
+        {
+          time,
+          bookedDate,
+          lawyerName,
+          lawyerEmail,
+          userEmail,
+          userName,
+          userId,
+        },
+        { withCredentials: true, credentials: "include" },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      dispatch({ type: "DeleteBookingByAdvisorSuccess", payload: data });
+    } catch (error) {
+      dispatch({
+        type: "DeleteBookingByAdvisorFailure",
         payload: error.response.data.message,
       });
     }

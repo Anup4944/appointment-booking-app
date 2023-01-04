@@ -31,10 +31,10 @@ const Advisor = () => {
     <>
       <div className="advisor">
         <Toaster position="top-center" reverseOrder={false} />
-        <OpenAvailiabiltiy id={advisor._id} />
+        <OpenAvailiabiltiy id={advisor?._id} />
         <AvailableDateAndTime advisor={advisor} />
       </div>
-      <Bookings />
+      <Bookings id={advisor?._id} />
     </>
   );
 };

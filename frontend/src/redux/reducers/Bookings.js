@@ -13,33 +13,38 @@ export const bookingReducer = createReducer(initialState, {
     state.isLoading = false;
     state.error = action.payload;
   },
-  //   LoadUserRequest: (state) => {
-  //     state.isLoading = true;
-  //   },
-  //   LoadUserSuccess: (state, action) => {
-  //     state.isLoading = false;
-  //     state.isAuth = true;
-  //     state.advisor = action.payload.advisor;
-  //   },
-  //   LoadUserFailure: (state, action) => {
-  //     state.isLoading = false;
-  //     state.error = action.payload;
-  //     state.isAuth = false;
-  //   },
-  //   LogoutUserRequest: (state) => {
-  //     state.isLoading = true;
-  //   },
-  //   LogoutUserSuccess: (state, action) => {
-  //     state.isLoading = false;
-  //     state.isAuth = false;
-  //     state.message = action.payload.message;
-  //     state.advisor = null;
-  //   },
-  //   LogoutUserFailure: (state, action) => {
-  //     state.isLoading = false;
-  //     state.error = action.payload;
-  //     state.isAuth = true;
-  //   },
+  DeleteBookingByAdvisorRequest: (state) => {
+    state.isLoading = true;
+  },
+  DeleteBookingByAdvisorSuccess: (state, action) => {
+    state.isLoading = false;
+    state.message = action.payload.message;
+  },
+  DeleteBookingByAdvisorFailure: (state, action) => {
+    state.isLoading = false;
+    state.error = action.payload;
+  },
+  clearErrors: (state) => {
+    state.error = null;
+  },
+  clearMsg: (state) => {
+    state.message = null;
+  },
+});
+
+export const bookingByIdReducer = createReducer(initialState, {
+  BookingByIdRequest: (state) => {
+    state.isLoading = true;
+  },
+  BookingByIdSuccess: (state, action) => {
+    state.isLoading = false;
+    state.message = action.payload.message;
+    state.yourBookings = action.payload.bookingById;
+  },
+  BookingByIdFailure: (state, action) => {
+    state.isLoading = false;
+    state.error = action.payload;
+  },
   clearErrors: (state) => {
     state.error = null;
   },

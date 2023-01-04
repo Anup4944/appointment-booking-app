@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import BookingCart from "./BookingCart";
 import Bookings from "../bookings/Bookings";
 import "../../styles/client.scss";
@@ -10,7 +10,7 @@ const Client = () => {
   return (
     <>
       <BookingCart client={client} />
-      <Bookings isClient client={client} />
+      <Bookings isClient client={client} id={client?._id} />
     </>
   );
 };

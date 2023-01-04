@@ -16,11 +16,19 @@ const bookingSchema = new mongoose.Schema(
     },
     lawyerName: {
       type: String,
-      required: [true, "Please enter your available time"],
+      required: [true, "Please enter your advisor name"],
+    },
+    lawyerEmail: {
+      type: String,
+      required: [true, "Please enter your advisor email"],
+    },
+    userEmail: {
+      type: String,
+      required: [true, "Please enter your user email"],
     },
     userName: {
       type: String,
-      required: [true, "Please enter your available time"],
+      required: [true, "Please enter your username"],
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,

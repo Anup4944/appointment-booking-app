@@ -12,9 +12,7 @@ import { isAuth } from "../middlewares/auth.js";
 
 router.route("/booking").post(bookAppointment).get(allBookings);
 router.route("/booking/:id").get(getBookingById);
-router
-  .route("/delete/advisor/booking/:id")
-  .delete(isAuth, deleteBookingByAdvisor);
+router.route("/delete/advisor/booking/:id").delete(deleteBookingByAdvisor);
 router
   .route("/delete/client/booking/:id")
   .delete(isAuth, deleteBookingByClient);

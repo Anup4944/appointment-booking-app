@@ -7,8 +7,16 @@ import { Bookings } from "../models/Bookings.js";
 
 // Save bookings
 export const bookAppointment = asyncAwait(async (req, res, next) => {
-  const { availableDate, time, lawyer, lawyerName, userName, userId } =
-    req.body;
+  const {
+    availableDate,
+    time,
+    lawyer,
+    lawyerName,
+    lawyerEmail,
+    userEmail,
+    userName,
+    userId,
+  } = req.body;
 
   // find advisor and user
   const advisor = await Advisor.findById(lawyer);
@@ -31,6 +39,8 @@ export const bookAppointment = asyncAwait(async (req, res, next) => {
     time,
     lawyer,
     lawyerName,
+    lawyerEmail,
+    userEmail,
     userName,
     user,
   };
@@ -87,7 +97,7 @@ export const getBookingById = asyncAwait(async (req, res, next) => {
   });
 
   if (bookingById.length <= 0) {
-    return next(new ErrorHandler("You have not made any bookings yet"));
+    return next(new ErrorHandler("No bookings available"));
   }
 
   res.status(200).json({ status: true, bookingById });
@@ -96,6 +106,7 @@ export const getBookingById = asyncAwait(async (req, res, next) => {
 // Delete booking by Advisor Id
 
 export const deleteBookingByAdvisor = asyncAwait(async (req, res, next) => {
+  console.log(req.body);
   // advisor id
   const { id } = req.params;
 
@@ -108,6 +119,10 @@ export const deleteBookingByAdvisor = asyncAwait(async (req, res, next) => {
     time: req.body.time,
     bookedDate: new Date(req.body.bookedDate),
     lawyer: id,
+    lawyerName: req.body.lawyerName,
+    lawyerEmail: req.body.lawyerEmail,
+    userEmail: req.body.userEmail,
+    userName: req.body.userName,
     user: req.body.userId,
   });
 
@@ -179,6 +194,10 @@ export const deleteBookingByClient = asyncAwait(async (req, res, next) => {
     time: req.body.time,
     bookedDate: new Date(req.body.bookedDate),
     lawyer: req.body.lawyer,
+    lawyerName: req.body.lawyerName,
+    lawyerEmail: req.body.lawyerEmail,
+    userEmail: req.body.userEmail,
+    userName: req.body.userName,
     user: id,
   });
 
