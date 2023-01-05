@@ -105,26 +105,16 @@ export const getBookingById = asyncAwait(async (req, res, next) => {
 
 // Delete booking by Advisor Id
 
-export const deleteBookingByAdvisor = asyncAwait(async (req, res, next) => {
-  console.log(req.body);
-  // advisor id
+export const deleteBooking = asyncAwait(async (req, res, next) => {
+  // booking id
   const { id } = req.params;
 
-  const advisor = await Advisor.findById(id);
+  const advisor = await Advisor.findById(req.body.lawyer);
 
   const user = await User.findById(req.body.userId);
 
   // find booking
-  const booking = await Bookings.findOne({
-    time: req.body.time,
-    bookedDate: new Date(req.body.bookedDate),
-    lawyer: id,
-    lawyerName: req.body.lawyerName,
-    lawyerEmail: req.body.lawyerEmail,
-    userEmail: req.body.userEmail,
-    userName: req.body.userName,
-    user: req.body.userId,
-  });
+  const booking = await Bookings.findById(id);
 
   if (!booking) {
     return next(new ErrorHandler("No booking found", 404));
@@ -153,7 +143,7 @@ export const deleteBookingByAdvisor = asyncAwait(async (req, res, next) => {
   const availability = await Availablity.create({
     time: req.body.time,
     availableDate: req.body.bookedDate,
-    lawyer: id,
+    lawyer: req.body.lawyer,
   });
 
   // add availability back
@@ -162,12 +152,7 @@ export const deleteBookingByAdvisor = asyncAwait(async (req, res, next) => {
 
   // delete booking
 
-  await Bookings.findOneAndRemove({
-    time: req.body.time,
-    bookedDate: new Date(req.body.bookedDate),
-    lawyer: id,
-    user: req.body.userId,
-  });
+  await Bookings.findByIdAndDelete(id);
 
   res.status(201).json({
     success: true,
@@ -178,65 +163,5 @@ export const deleteBookingByAdvisor = asyncAwait(async (req, res, next) => {
     } has been cancelled. Your availablity for ${new Date(
       req.body.bookedDate
     )}  at ${req.body.time} has been added back`,
-  });
-});
-
-// Delete booking by Client Id
-export const deleteBookingByClient = asyncAwait(async (req, res, next) => {
-  // client Id
-  const { id } = req.params;
-
-  const advisor = await Advisor.findOne({ _id: req.body.lawyer });
-
-  const user = await User.findById(id);
-
-  const booking = await Bookings.findOne({
-    time: req.body.time,
-    bookedDate: new Date(req.body.bookedDate),
-    lawyer: req.body.lawyer,
-    lawyerName: req.body.lawyerName,
-    lawyerEmail: req.body.lawyerEmail,
-    userEmail: req.body.userEmail,
-    userName: req.body.userName,
-    user: id,
-  });
-
-  if (advisor.upComingBooking.includes(booking._id)) {
-    const index = advisor.upComingBooking.indexOf(booking._id);
-
-    advisor.upComingBooking.splice(index, 1);
-
-    await advisor.save();
-  }
-
-  if (user.futureBookings.includes(booking._id)) {
-    const index = user.futureBookings.indexOf(booking._id);
-
-    user.futureBookings.splice(index, 1);
-
-    await user.save();
-  }
-
-  const availability = await Availablity.create({
-    time: req.body.time,
-    availableDate: req.body.bookedDate,
-    lawyer: req.body.lawyer,
-  });
-
-  advisor.availableDatesAndTime.unshift(availability._id);
-  await advisor.save();
-
-  await Bookings.findOneAndRemove({
-    time: req.body.time,
-    bookedDate: new Date(req.body.bookedDate),
-    lawyer: req.body.lawyer,
-    user: id,
-  });
-
-  res.status(201).json({
-    success: true,
-    message: `Your booking for ${new Date(req.body.bookedDate)} at ${
-      req.body.time
-    } with lawyer ${advisor.fullName} has been cancelled. `,
   });
 });

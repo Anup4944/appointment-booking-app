@@ -85,22 +85,17 @@ GET http://localhost:4000/api/v1/booking
 GET http://localhost:4000/api/v1/booking/63b2bc5221525d4db28f95ff
 
 
-### Delete bookign by advisor
-DELETE http://localhost:4000/api/v1/delete/advisor/booking/6392c01f4c45797b3d6ff4a8
+### Delete booking
+DELETE http://localhost:4000/api/v1/delete/booking/63b62ef35c78ab7f334748a8
 Content-Type: application/json
 
 {
-    "time":"5AM",
-    "bookedDate":"2023-01-20",
-    "userId":"639852f319b23d396ebd9eea"
-}
-
-### Delete bookign by client
-DELETE http://localhost:4000/api/v1/delete/client/booking/639852f319b23d396ebd9eea
-Content-Type: application/json
-
-{
-    "time":"5AM",
-    "bookedDate":"2023-01-20",
-    "lawyer":"6392c01f4c45797b3d6ff4a8"
+    "time":"2PM",
+    "bookedDate":"2023-01-12",
+    "lawyer":"63b55697714b1fcd3387bd49",
+    "lawyerName": "John Smith",
+    "lawyerEmail":"js@gmail.com",
+    "userEmail":"anuppoudel60@gmail.com",
+    "userName":"Anup Poudel",
+    "userId":"63b2bc5221525d4db28f95ff"
 }

@@ -50,9 +50,9 @@ const BookingCart = ({ client }) => {
             <ul>
               <li> Available Date :{formatDate(item.availableDate)}</li>
               <li> Time: {item.time}</li>
-              <li> Lawyer's name: {item.lawyer.fullName}</li>
-              <li> Email: {item.lawyer.email}</li>
-              <li> Category: {item.lawyer.category}</li>
+              <li> Lawyer's name: {item.lawyer?.fullName}</li>
+              <li> Email: {item.lawyer?.email}</li>
+              <li> Category: {item.lawyer?.category}</li>
             </ul>
             <button
               onClick={async () => {
