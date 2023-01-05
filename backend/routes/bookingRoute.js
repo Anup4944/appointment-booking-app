@@ -7,10 +7,9 @@ import {
   deleteBooking,
   getBookingById,
 } from "../controller/bookingController.js";
-import { isAuth } from "../middlewares/auth.js";
 
 router.route("/booking").post(bookAppointment).get(allBookings);
 router.route("/booking/:id").get(getBookingById);
-router.route("/delete/booking/:id").delete(deleteBooking);
+router.route("/delete/booking/:id").post(deleteBooking);
 
 export default router;

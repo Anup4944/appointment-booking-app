@@ -3,7 +3,7 @@
 @import "responsiveWidth";
 
 .login {
-  height: 85%;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -110,34 +110,39 @@
 
 @media screen and (max-width: $extraSmall) {
   .login {
-    height: 100vh;
-
     .cart {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      width: 100%;
+      flex-direction: column;
+      height: 100vh;
 
       .left {
-        display: none;
+        width: 100vw;
+
+        h1,
+        p {
+          font-size: 25px;
+        }
       }
       .right {
-        height: 90%;
-        width: 90%;
+        padding: 30px;
+        gap: 20px;
+        width: 100vw;
         h1 {
           font-size: 25px;
         }
 
         form {
+          gap: 5px;
           input {
             padding: 20px;
-            font-size: 20px;
+            font-size: 10px;
           }
           .passHolder {
             span {
               font-size: 20px;
             }
+          }
+          button {
+            margin-top: 5px;
           }
         }
       }

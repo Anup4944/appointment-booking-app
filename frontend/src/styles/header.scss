@@ -40,6 +40,12 @@
 @media screen and (max-width: $extraSmall) {
   .headerBar {
     height: 2vh;
+    h1 {
+      font-size: 25px;
+    }
+    button {
+      padding: 10px 10px;
+    }
   }
 }
 @media screen and (max-width: $small) {

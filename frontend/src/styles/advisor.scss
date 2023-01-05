@@ -84,13 +84,13 @@
     .card {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       margin: 1rem 0.5rem;
       flex-wrap: wrap;
       border-radius: 10px;
       padding: 5px 15px;
       width: 200px;
-      max-height: 250px;
+      max-height: 350px;
       gap: 10px;
       background-color: $white;
 
@@ -102,15 +102,15 @@
         h4 {
           font: $secondaryFont;
         }
-      }
-      button {
-        flex: 1;
-        padding: 10px;
-        border-radius: 10px;
-        border: none;
-        background-color: $btn-text-clr;
-        color: $white;
-        cursor: pointer;
+        button {
+          flex: 1;
+          padding: 10px;
+          border-radius: 10px;
+          border: none;
+          background-color: $btn-text-clr;
+          color: $white;
+          cursor: pointer;
+        }
       }
     }
   }
@@ -121,21 +121,27 @@
     padding: 20px 20px;
     width: 100%;
     flex-direction: column;
-    gap: 15px;
+    gap: 5px;
     margin-top: 1rem;
-  }
 
-  .openAva {
-    margin-top: 10px;
+    .availabiltyBox {
+      gap: 0.5rem;
+      min-height: 200px;
 
-    input,
-    button {
-      font-size: 20px;
+      h2 {
+        font-size: 20px;
+        padding: 10px 0;
+        display: grid;
+        place-items: center;
+      }
+
+      input {
+        padding: 10px 5px;
+      }
+      button {
+        padding: 10px;
+      }
     }
-  }
-
-  .bookingContainer {
-    overflow-y: auto;
   }
 }
 

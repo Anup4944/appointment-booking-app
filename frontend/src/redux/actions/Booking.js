@@ -67,11 +67,12 @@ export const getBookingsById = (id) => async (dispatch) => {
   }
 };
 
-export const deleteBookingByAdvisorAction =
+export const deleteBookingAction =
   (
     id,
     time,
     bookedDate,
+    lawyer,
     lawyerName,
     lawyerEmail,
     userEmail,
@@ -84,11 +85,12 @@ export const deleteBookingByAdvisorAction =
         type: "DeleteBookingByAdvisorRequest",
       });
 
-      const { data } = await axios.delete(
-        `http://localhost:4000/api/v1/delete/advisor/booking/${id}`,
+      const { data } = await axios.post(
+        `http://localhost:4000/api/v1/delete/booking/${id}`,
         {
           time,
           bookedDate,
+          lawyer,
           lawyerName,
           lawyerEmail,
           userEmail,

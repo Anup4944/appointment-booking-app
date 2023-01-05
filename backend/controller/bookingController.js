@@ -97,7 +97,9 @@ export const getBookingById = asyncAwait(async (req, res, next) => {
   });
 
   if (bookingById.length <= 0) {
-    return next(new ErrorHandler("No bookings available"));
+    return res
+      .status(200)
+      .json({ status: false, message: "No bookings available", bookingById });
   }
 
   res.status(200).json({ status: true, bookingById });
@@ -158,9 +160,7 @@ export const deleteBooking = asyncAwait(async (req, res, next) => {
     success: true,
     message: `Your booking for ${new Date(req.body.bookedDate)} at ${
       req.body.time
-    } with client ${
-      user.name
-    } has been cancelled. Your availablity for ${new Date(
+    } with client ${user.name} has been cancelled. Availablity for ${new Date(
       req.body.bookedDate
     )}  at ${req.body.time} has been added back`,
   });

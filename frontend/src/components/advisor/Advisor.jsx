@@ -5,6 +5,7 @@ import Bookings from "../bookings/Bookings";
 import "../../styles/advisor.scss";
 import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
+import Header from "../Header";
 
 const Advisor = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const Advisor = () => {
   }, [dispatch, message, advisor.fullName]);
   return (
     <>
+      <Header />
       <div className="advisor">
         <Toaster position="top-center" reverseOrder={false} />
         <OpenAvailiabiltiy id={advisor?._id} />

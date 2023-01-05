@@ -11,11 +11,11 @@
 
 .main {
   background-color: $main-backgroud;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 @media screen and (max-width: $extraSmall) {
   .main {
-    height: 100vh;
+    min-height: 100vh;
   }
 }

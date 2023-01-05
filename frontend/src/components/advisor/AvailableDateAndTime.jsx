@@ -23,15 +23,15 @@ const AvailableDateAndTime = ({ advisor }) => {
               <div className="dateAndTime">
                 <h4>Date : {formatDate(item.availableDate)}</h4>
                 <h4>Time : {item.time}</h4>
+                <button
+                  onClick={async () => {
+                    await dispatch(deleteAvailability(item._id));
+                    dispatch(loadAdvisorAction());
+                  }}
+                >
+                  Delete
+                </button>
               </div>
-              <button
-                onClick={async () => {
-                  await dispatch(deleteAvailability(item._id));
-                  dispatch(loadAdvisorAction());
-                }}
-              >
-                Delete
-              </button>
             </div>
           ))
         )}

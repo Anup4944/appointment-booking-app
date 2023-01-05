@@ -1,17 +1,21 @@
 import React, { useEffect } from "react";
-import "../../styles/booking.scss";
+import "../../styles/bookings.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillCloseCircle } from "react-icons/ai";
 import {
-  deleteBookingByAdvisorAction,
+  deleteBookingAction,
   getBookingsById,
 } from "../../redux/actions/Booking";
 import { formatDate } from "../../utils/formatDate";
+import {
+  getAllAvailability,
+  loadAdvisorAction,
+} from "../../redux/actions/Advisor";
 
 const Bookings = ({ isClient, client, id }) => {
   const dispatch = useDispatch();
 
-  const { yourBookings, error } = useSelector(
+  const { yourBookings, message } = useSelector(
     (state) => state.bookingByIdReducer
   );
   useEffect(() => {
@@ -21,11 +25,12 @@ const Bookings = ({ isClient, client, id }) => {
     <div className="bookingContainer">
       <h4 className="bookingHeader">Your upcoming bookings</h4>
       <div className="tableContainer">
-        {!yourBookings ? (
-          <h3 className="errClass">{error}</h3>
+        {yourBookings?.length < 1 ? (
+          <h3 className="errClass">{message}</h3>
         ) : (
           <table>
-            <tbody>
+            <caption>Your bookings</caption>
+            <thead>
               <tr>
                 {isClient ? <th>Lawyer Name</th> : <th>Client Name</th>}
                 {isClient ? <th>Lawyer's Email</th> : <th>Client's Email</th>}
@@ -34,37 +39,67 @@ const Bookings = ({ isClient, client, id }) => {
                 <th>Booked on</th>
                 <th>Action</th>
               </tr>
-              {yourBookings?.map((item, key) => (
-                <tr key={item}>
-                  <td>{isClient ? item.lawyerName : item.userName} </td>
-                  <td>{isClient ? item.lawyerEmail : item.userEmail}</td>
-                  <td>{formatDate(item.bookedDate)}</td>
-                  <td>{item.time}</td>
-                  <td>{formatDate(item.createdAt)} </td>
-                  <td>
+            </thead>
+            {yourBookings?.map((item, key) => (
+              <tbody>
+                <tr key={item._id}>
+                  <td
+                    data-label={`${isClient ? "Lawyer Name" : "Client Name"}`}
+                  >
+                    {isClient ? item.lawyerName : item.userName}{" "}
+                  </td>
+                  <td
+                    data-label={`${
+                      isClient ? "Lawyer's Email" : "Client's Email"
+                    }`}
+                  >
+                    {isClient ? item.lawyerEmail : item.userEmail}
+                  </td>
+                  <td data-label="Booked Date">
+                    {formatDate(item.bookedDate)}
+                  </td>
+                  <td data-label="Booked Time">{item.time}</td>
+                  <td data-label="Booked On">{formatDate(item.createdAt)} </td>
+                  <td data-label="Action">
                     <AiFillCloseCircle
-                      onClick={async () => {
+                      onClick={async () =>
                         isClient
-                          ? console.log("CLICKED")
-                          : await dispatch(
-                              deleteBookingByAdvisorAction(
-                                id,
+                          ? (await dispatch(
+                              deleteBookingAction(
+                                item._id,
                                 item.time,
                                 item.bookedDate,
+                                item.lawyer,
                                 item.lawyerName,
                                 item.lawyerEmail,
                                 item.userEmail,
                                 item.userName,
                                 item.user
                               )
-                            );
-                        await dispatch(getBookingsById(id));
-                      }}
+                            ),
+                            await dispatch(getBookingsById(id)),
+                            dispatch(getAllAvailability()))
+                          : (await dispatch(
+                              deleteBookingAction(
+                                item._id,
+                                item.time,
+                                item.bookedDate,
+                                item.lawyer,
+                                item.lawyerName,
+                                item.lawyerEmail,
+                                item.userEmail,
+                                item.userName,
+                                item.user
+                              )
+                            ),
+                            dispatch(getBookingsById(id)),
+                            await dispatch(loadAdvisorAction()))
+                      }
                     />
                   </td>
                 </tr>
-              ))}
-            </tbody>
+              </tbody>
+            ))}
           </table>
         )}
       </div>

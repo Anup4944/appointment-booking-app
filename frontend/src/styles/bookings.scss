@@ -1,0 +1,110 @@
+@import "fonts";
+@import "colors";
+@import "responsiveWidth";
+
+.bookingContainer {
+  padding: 2rem;
+  .bookingHeader {
+    text-align: center;
+    font: $primaryFont;
+    color: $headerColor;
+  }
+
+  .tableContainer {
+    margin-top: 2vmax;
+    font: $secondaryFont;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    table {
+      //   text-align: left;
+      //   position: relative;
+      //   border-collapse: collapse;
+      background-color: #f6f6f6;
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      table-layout: fixed;
+      caption {
+        font-size: 1.3em;
+      }
+
+      td {
+        padding: 0.625em;
+        text-align: center;
+        text-align: center;
+        svg {
+          height: 2rem;
+          width: 4rem;
+          cursor: pointer;
+        }
+      }
+
+      th {
+        border: 1px solid #999;
+        padding: 20px;
+        text-align: center;
+        background: $headerColor;
+        color: white;
+        border-radius: 0;
+        padding: 15px;
+        position: sticky;
+        top: 0;
+      }
+
+      tfoot > tr {
+        background: $main-backgroud;
+        color: $white;
+      }
+      tbody > tr:hover {
+        background-color: $main-backgroud;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $extraSmall) {
+  .bookingContainer {
+    .tableContainer {
+      overflow-x: auto;
+
+      table {
+        border: 0;
+
+        thead {
+          border: none;
+          clip: rect(0 0 0 0);
+          height: 1px;
+          margin: -1px;
+          overflow: hidden;
+          padding: 0;
+          position: absolute;
+          width: 1px;
+        }
+        tr {
+          border-bottom: 3px solid #ddd;
+          display: block;
+          margin-bottom: 0.625em;
+        }
+        td {
+          border-bottom: 1px solid #ddd;
+          display: block;
+          font-size: 0.8em;
+          text-align: right;
+        }
+
+        td::before {
+          content: attr(data-label);
+          float: left;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+      }
+      td:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+}
