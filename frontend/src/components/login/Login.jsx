@@ -9,6 +9,7 @@ import {
 import toast, { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../redux/actions/Advisor";
+import { Loading } from "..";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -17,7 +18,12 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  const { message, error } = useSelector((state) => state.advisorReducer);
+  const { message, error, isLoading } = useSelector(
+    (state) => state.advisorReducer
+  );
+  const { isLoading: googleLoading } = useSelector(
+    (state) => state.clientReducer
+  );
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -61,7 +67,9 @@ const Login = () => {
     window.open(`http://localhost:4000/api/v1/google/login`, "_self");
   };
 
-  return (
+  return isLoading || googleLoading ? (
+    <Loading />
+  ) : (
     <div className="login">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="cart">
