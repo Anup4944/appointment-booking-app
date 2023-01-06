@@ -3,7 +3,7 @@
 @import "responsiveWidth";
 
 .login {
-  height: 80vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,19 +152,16 @@
 
 @media screen and (max-width: $small) {
   .login {
-    height: 100%;
-
     .cart {
-      display: flex;
+      min-height: 100vh;
       justify-content: center;
       align-items: center;
-      width: 100%;
-      padding: 0 20px;
       .left {
-        background-size: cover;
+        gap: 2px;
       }
 
       .right {
+        gap: 30px;
         h1 {
           font-size: 20px;
         }
@@ -187,7 +184,6 @@
 @media screen and (max-width: $large) {
   .login {
     height: 100%;
-
     .cart {
       display: flex;
       justify-content: center;
@@ -196,6 +192,7 @@
       padding: 0 20px;
       .left {
         background-size: cover;
+        gap: 2px;
       }
 
       .right {

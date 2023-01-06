@@ -17,9 +17,6 @@
     align-items: center;
     justify-content: center;
     table {
-      //   text-align: left;
-      //   position: relative;
-      //   border-collapse: collapse;
       background-color: #f6f6f6;
       border: 1px solid #ccc;
       border-collapse: collapse;
@@ -29,6 +26,7 @@
       table-layout: fixed;
       caption {
         font-size: 1.3em;
+        padding: 20px 0px;
       }
 
       td {
@@ -93,6 +91,7 @@
           display: block;
           font-size: 0.8em;
           text-align: right;
+          overflow-y: auto;
         }
 
         td::before {
@@ -104,6 +103,61 @@
       }
       td:last-child {
         border-bottom: 0;
+      }
+    }
+  }
+}
+@media screen and (max-width: $small) {
+  .bookingContainer {
+    .tableContainer {
+      overflow-x: auto;
+
+      table {
+        border: 0;
+
+        thead {
+          border: none;
+          clip: rect(0 0 0 0);
+          height: 1px;
+          margin: -1px;
+          overflow: hidden;
+          padding: 0;
+          position: absolute;
+          width: 1px;
+        }
+        tr {
+          border-bottom: 3px solid #ddd;
+          display: block;
+          margin-bottom: 0.625em;
+        }
+        td {
+          border-bottom: 1px solid #ddd;
+          display: block;
+          font-size: 0.8em;
+          text-align: right;
+          overflow-y: auto;
+        }
+
+        td::before {
+          content: attr(data-label);
+          float: left;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+      }
+      td:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+}
+@media screen and (max-width: $large) {
+  .bookingContainer {
+    .tableContainer {
+      table {
+        td {
+          overflow-x: auto;
+        }
       }
     }
   }

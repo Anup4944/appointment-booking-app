@@ -19,3 +19,8 @@
     min-height: 100vh;
   }
 }
+@media screen and (max-width: $large) {
+  .main {
+    min-height: 100vh;
+  }
+}
