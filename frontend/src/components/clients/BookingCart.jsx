@@ -7,6 +7,7 @@ import {
 import { getAllAvailability } from "../../redux/actions/Advisor";
 import toast, { Toaster } from "react-hot-toast";
 import { formatDate } from "../../utils/formatDate";
+import { Loading } from "..";
 
 const BookingCart = ({ client }) => {
   const dispatch = useDispatch();
@@ -15,7 +16,9 @@ const BookingCart = ({ client }) => {
     (state) => state.allAvailabilityReducer
   );
 
-  const { message: bookedMsg } = useSelector((state) => state.bookingReducer);
+  const { message: bookedMsg, isLoading } = useSelector(
+    (state) => state.bookingReducer
+  );
 
   useEffect(() => {
     dispatch(getAllAvailability());
@@ -39,7 +42,9 @@ const BookingCart = ({ client }) => {
     }
   }, [dispatch, bookedMsg]);
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="mainCart">
       <Toaster position="top-center" reverseOrder={false} />
       {!allAvailability ? (

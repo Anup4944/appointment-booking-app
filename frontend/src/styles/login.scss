@@ -105,6 +105,23 @@
           cursor: pointer;
         }
       }
+      .line {
+        height: 1px;
+        background: black;
+      }
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        button {
+          padding: 10px;
+          border-radius: 10px;
+          border: none;
+          background-color: $btn-text-clr;
+          color: $white;
+          cursor: pointer;
+        }
+      }
     }
   }
 }
@@ -154,25 +171,41 @@
 @media screen and (max-width: $small) {
   .login {
     .cart {
-      min-height: 100vh;
-      justify-content: center;
-      align-items: center;
+      flex-direction: column;
+      height: 100vh;
 
+      .left {
+        width: 100vw;
+
+        h1,
+        p {
+          font-size: 25px;
+        }
+        button {
+          margin-top: 10px;
+        }
+      }
       .right {
-        gap: 35px;
+        padding: 30px;
+        gap: 20px;
+        width: 100vw;
         h1 {
-          font-size: 20px;
+          font-size: 25px;
         }
 
         form {
+          gap: 5px;
           input {
             padding: 20px;
-            font-size: 20px;
+            font-size: 10px;
           }
           .passHolder {
             span {
               font-size: 20px;
             }
+          }
+          button {
+            margin-top: 5px;
           }
         }
       }

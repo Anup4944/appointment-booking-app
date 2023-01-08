@@ -76,8 +76,6 @@ export const logout = asyncAwait(async (req, res, next) => {
 export const openAvailiability = asyncAwait(async (req, res, next) => {
   const advisor = await Advisor.findById(req.body.id);
 
-  const availableDate = await Availablity.find({ lawyer: req.body.id });
-
   const newAvailablityData = {
     availableDate: new Date(req.body.availableDate),
     time: req.body.time.toUpperCase(),

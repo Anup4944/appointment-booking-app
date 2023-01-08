@@ -121,6 +121,11 @@ const Login = () => {
 
             <button>Login</button>
           </form>
+          <div className="line"></div>
+          <div>
+            <button>Register as Advisor</button>
+            <button>Forgot password</button>
+          </div>
         </div>
       </div>
     </div>
