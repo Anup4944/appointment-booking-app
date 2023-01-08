@@ -77,7 +77,8 @@ export const deleteBookingAction =
     lawyerEmail,
     userEmail,
     userName,
-    userId
+    userId,
+    isClient
   ) =>
   async (dispatch) => {
     try {
@@ -96,6 +97,7 @@ export const deleteBookingAction =
           userEmail,
           userName,
           userId,
+          isClient,
         },
         { withCredentials: true, credentials: "include" },
         {

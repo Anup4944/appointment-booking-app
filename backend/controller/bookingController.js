@@ -72,21 +72,21 @@ export const bookAppointment = asyncAwait(async (req, res, next) => {
     await advisor.save();
   }
 
-  var message = `You have new booking with Mr. ${user.name} on ${newBooking.bookedDate} at ${newBooking.time} `;
+  // var message = `You have new booking with Mr. ${user.name} on ${newBooking.bookedDate} at ${newBooking.time} `;
 
-  await sendEmail({
-    email: advisor.email,
-    subject: "New Booking",
-    message,
-  });
+  // await sendEmail({
+  //   email: advisor.email,
+  //   subject: "New Booking",
+  //   message,
+  // });
 
-  var message = `You have booked an appointment with Mr. ${advisor.fullName} on ${newBooking.bookedDate} at ${newBooking.time}`;
+  // var message = `You have booked an appointment with Mr. ${advisor.fullName} on ${newBooking.bookedDate} at ${newBooking.time}`;
 
-  await sendEmail({
-    email: user.email,
-    subject: "Booking Confirmation Email",
-    message,
-  });
+  // await sendEmail({
+  //   email: user.email,
+  //   subject: "Booking Confirmation Email",
+  //   message,
+  // });
 
   res.status(201).json({
     success: true,
@@ -173,12 +173,44 @@ export const deleteBooking = asyncAwait(async (req, res, next) => {
 
   await Bookings.findByIdAndDelete(id);
 
+  const ifClient = `Your booking for ${new Date(req.body.bookedDate)} at ${
+    req.body.time
+  } with advisor Mr ${advisor.fullName} has been cancelled.`;
+
+  const ifAdvisor = `Your booking for ${new Date(req.body.bookedDate)} at ${
+    req.body.time
+  } with client ${user.name} has been cancelled. Availablity for ${new Date(
+    req.body.bookedDate
+  )}  at ${req.body.time} has been added back`;
+
+  await sendEmail({
+    email: advisor.email,
+    subject: "Booking deleted",
+    message: ifAdvisor,
+  });
+
+  await sendEmail({
+    email: user.email,
+    subject: "Booking deleted",
+    message: ifClient,
+  });
+
   res.status(201).json({
     success: true,
-    message: `Your booking for ${new Date(req.body.bookedDate)} at ${
-      req.body.time
-    } with client ${user.name} has been cancelled. Availablity for ${new Date(
-      req.body.bookedDate
-    )}  at ${req.body.time} has been added back`,
+    message: req.body.isClient
+      ? `Your booking for ${new Date(req.body.bookedDate)} at ${
+          req.body.time
+        } with advisor Mr ${
+          advisor.fullName
+        } has been cancelled. Availablity for ${new Date(
+          req.body.bookedDate
+        )}  at ${req.body.time} has been added back`
+      : `Your booking for ${new Date(req.body.bookedDate)} at ${
+          req.body.time
+        } with client ${
+          user.name
+        } has been cancelled. Availablity for ${new Date(
+          req.body.bookedDate
+        )}  at ${req.body.time} has been added back`,
   });
 });

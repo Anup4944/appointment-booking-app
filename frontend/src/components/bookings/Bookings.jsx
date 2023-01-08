@@ -18,9 +18,11 @@ const Bookings = ({ isClient, client, id }) => {
   const { yourBookings, message } = useSelector(
     (state) => state.bookingByIdReducer
   );
+
   useEffect(() => {
     dispatch(getBookingsById(id));
   }, [dispatch, id]);
+
   return (
     <div className="bookingContainer">
       <h4 className="bookingHeader">Your upcoming bookings</h4>
@@ -74,7 +76,8 @@ const Bookings = ({ isClient, client, id }) => {
                                 item.lawyerEmail,
                                 item.userEmail,
                                 item.userName,
-                                item.user
+                                item.user,
+                                isClient
                               )
                             ),
                             await dispatch(getBookingsById(id)),
@@ -89,10 +92,11 @@ const Bookings = ({ isClient, client, id }) => {
                                 item.lawyerEmail,
                                 item.userEmail,
                                 item.userName,
-                                item.user
+                                item.user,
+                                (isClient = false)
                               )
                             ),
-                            dispatch(getBookingsById(id)),
+                            await dispatch(getBookingsById(id)),
                             await dispatch(loadAdvisorAction()))
                       }
                     />

@@ -13,6 +13,9 @@ const Advisor = () => {
   const { message, advisor } = useSelector((state) => state.advisorReducer);
 
   const { isLoading } = useSelector((state) => state.availabilityReducer);
+  const { message: bookedMsg, isLoading: dltBooking } = useSelector(
+    (state) => state.bookingReducer
+  );
 
   useEffect(() => {
     if (message) {
@@ -30,10 +33,25 @@ const Advisor = () => {
       });
       dispatch({ type: "clearMsg" });
     }
-  }, [dispatch, message, advisor.fullName]);
+    if (bookedMsg) {
+      toast.success(`${bookedMsg}`, {
+        icon: "✅",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: {
+          borderRadius: "10px",
+        },
+      });
+      dispatch({ type: "clearMsg" });
+    }
+  }, [dispatch, message, advisor.fullName, bookedMsg]);
   return (
     <>
-      {isLoading ? (
+      {isLoading || dltBooking ? (
         <Loading />
       ) : (
         <>
