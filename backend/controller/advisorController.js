@@ -5,6 +5,7 @@ import { sendToken } from "../utils/token.js";
 import { Availablity } from "../models/Availability.js";
 import { sendEmail } from "../utils/sendEmail.js";
 import crypto from "crypto";
+import { User } from "../models/User.js";
 
 export const register = asyncAwait(async (req, res, next) => {
   const { fullName, email, password, category } = req.body;
@@ -12,7 +13,22 @@ export const register = asyncAwait(async (req, res, next) => {
   let advisor = await Advisor.findOne({ email });
 
   if (advisor) {
-    return next(new ErrorHandler("User already exist with this email", 402));
+    return next(
+      new ErrorHandler(
+        `An account with ${email} has already been registered`,
+        402
+      )
+    );
+  }
+  const user = await User.findOne({ email });
+
+  if (user) {
+    return next(
+      new ErrorHandler(
+        `Client account already exist with ${email}. Please use different email address.`,
+        402
+      )
+    );
   }
 
   advisor = await Advisor.create({

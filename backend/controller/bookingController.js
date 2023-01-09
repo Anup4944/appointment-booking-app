@@ -72,21 +72,21 @@ export const bookAppointment = asyncAwait(async (req, res, next) => {
     await advisor.save();
   }
 
-  // var message = `You have new booking with Mr. ${user.name} on ${newBooking.bookedDate} at ${newBooking.time} `;
+  var message = `You have new booking with Mr. ${user.name} on ${newBooking.bookedDate} at ${newBooking.time} `;
 
-  // await sendEmail({
-  //   email: advisor.email,
-  //   subject: "New Booking",
-  //   message,
-  // });
+  await sendEmail({
+    email: advisor.email,
+    subject: "New Booking",
+    message,
+  });
 
-  // var message = `You have booked an appointment with Mr. ${advisor.fullName} on ${newBooking.bookedDate} at ${newBooking.time}`;
+  var message = `You have booked an appointment with Mr. ${advisor.fullName} on ${newBooking.bookedDate} at ${newBooking.time}`;
 
-  // await sendEmail({
-  //   email: user.email,
-  //   subject: "Booking Confirmation Email",
-  //   message,
-  // });
+  await sendEmail({
+    email: user.email,
+    subject: "Booking Confirmation Email",
+    message,
+  });
 
   res.status(201).json({
     success: true,

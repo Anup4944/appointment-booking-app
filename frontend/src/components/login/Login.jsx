@@ -10,6 +10,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../redux/actions/Advisor";
 import { Loading } from "..";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -123,7 +124,10 @@ const Login = () => {
           </form>
           <div className="line"></div>
           <div>
-            <button>Register as Advisor</button>
+            <Link to="/register">
+              {" "}
+              <button>Register as Advisor</button>
+            </Link>
             <button>Forgot password</button>
           </div>
         </div>
