@@ -11,6 +11,9 @@ const Advisor = lazy(() => import("./components/advisor/Advisor"));
 const Client = lazy(() => import("./components/clients/Client"));
 const Login = lazy(() => import("./components/login/Login"));
 const Register = lazy(() => import("./components/advisor/Register"));
+const ForgotPassword = lazy(() =>
+  import("./components/advisor/ForgotPassword")
+);
 
 const App = () => {
   const dispatch = useDispatch();
@@ -29,6 +32,7 @@ const App = () => {
             <Route path="/" element={isAuth ? <Advisor /> : <Login />} />
             <Route path="/client/home" element={<Client />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot/password" element={<ForgotPassword />} />
           </Routes>
         </div>
       </Suspense>

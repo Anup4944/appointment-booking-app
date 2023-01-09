@@ -39,6 +39,16 @@ div {
           font-size: 1vmax;
           cursor: pointer;
         }
+        select {
+          font: $secondaryFont;
+          width: 90%;
+          padding: 1vmax 4vmax;
+          margin: 2rem 0;
+          box-sizing: border-box;
+          border: 1px solid rgba(0, 0, 0, 0.267);
+          border-radius: 4px;
+          outline: none;
+        }
       }
       button {
         margin-top: 30px;

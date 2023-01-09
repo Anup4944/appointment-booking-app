@@ -128,7 +128,10 @@ const Login = () => {
               {" "}
               <button>Register as Advisor</button>
             </Link>
-            <button>Forgot password</button>
+            <Link to="/forgot/password">
+              {" "}
+              <button>Forgot password?</button>
+            </Link>
           </div>
         </div>
       </div>
