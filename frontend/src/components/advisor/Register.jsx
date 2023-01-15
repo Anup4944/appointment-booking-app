@@ -73,6 +73,7 @@ const Register = () => {
             </select>
           </div>
           <button>Register</button>
+          <a href="/">Back to login</a>
         </form>
       </div>
     </div>

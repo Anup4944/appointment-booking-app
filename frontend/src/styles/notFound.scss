@@ -1,0 +1,19 @@
+@import "colors";
+@import "fonts";
+@import "responsiveWidth";
+
+.notFound {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  .notFoundWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    h3 {
+      font: $mainFont;
+    }
+  }
+}
