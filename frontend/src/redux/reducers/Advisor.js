@@ -17,6 +17,21 @@ export const advisorReducer = createReducer(initialState, {
     state.isAuth = false;
     state.error = action.payload;
   },
+  RegisterRequest: (state) => {
+    state.isLoading = true;
+    state.isAuth = false;
+  },
+  RegisterSuccess: (state, action) => {
+    state.isLoading = false;
+    state.isAuth = true;
+    state.message = action.payload.message;
+    state.advisor = action.payload.advisor;
+  },
+  RegisterFailure: (state, action) => {
+    state.isLoading = false;
+    state.isAuth = false;
+    state.message = action.payload;
+  },
   LoadUserRequest: (state) => {
     state.isLoading = true;
   },

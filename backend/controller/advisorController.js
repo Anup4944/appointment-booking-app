@@ -47,7 +47,7 @@ export const register = asyncAwait(async (req, res, next) => {
 
   res.status(201).cookie("token", token, options).json({
     success: true,
-    message: "Your account has registered succesfully",
+    message: "Your account has registered succesfully. You can login now.",
     advisor,
     token,
   });

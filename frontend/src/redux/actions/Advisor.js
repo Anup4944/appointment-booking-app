@@ -21,6 +21,31 @@ export const loginAction = (email, password) => async (dispatch) => {
   }
 };
 
+export const registerAction =
+  (fullName, email, password, category) => async (dispatch) => {
+    try {
+      dispatch({ type: "RegisterRequest" });
+
+      const { data } = await axios.post(
+        "http://localhost:4000/api/v1/register",
+        { fullName, email, password, category },
+        { withCredentials: true, credentials: "include" },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      dispatch({ type: "RegisterSuccess", payload: data });
+    } catch (error) {
+      dispatch({
+        type: "RegisterFailure",
+        payload: error.response.data.message,
+      });
+    }
+  };
+
 export const loadAdvisorAction = () => async (dispatch) => {
   try {
     dispatch({ type: "LoadUserRequest" });
