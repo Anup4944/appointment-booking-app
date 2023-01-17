@@ -3,6 +3,7 @@ import {
   advisorReducer,
   availabilityReducer,
   allAvailabilityReducer,
+  recoverPasswordReducer,
 } from "./reducers/Advisor";
 import { clientReducer } from "./reducers/Client";
 import { bookingReducer, bookingByIdReducer } from "./reducers/Bookings";
@@ -15,6 +16,7 @@ const store = configureStore({
     allAvailabilityReducer,
     bookingReducer,
     bookingByIdReducer,
+    recoverPasswordReducer,
   },
 });
 

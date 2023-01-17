@@ -119,3 +119,28 @@ export const allAvailabilityReducer = createReducer(initialState, {
     state.error = null;
   },
 });
+
+export const recoverPasswordReducer = createReducer(initialState, {
+  ForgetPasswordRequest: (state) => {
+    state.isLoading = true;
+  },
+  ForgetPasswordSuccess: (state, action) => {
+    state.isLoading = false;
+    state.message = action.payload.message;
+  },
+  ForgetPasswordFailure: (state, action) => {
+    state.isLoading = false;
+    state.message = action.payload;
+  },
+  ResetPasswordRequest: (state) => {
+    state.isLoading = true;
+  },
+  ResetPasswordSuccess: (state, action) => {
+    state.isLoading = false;
+    state.message = action.payload.message;
+  },
+  ResetPasswordFailure: (state, action) => {
+    state.isLoading = false;
+    state.message = action.payload;
+  },
+});

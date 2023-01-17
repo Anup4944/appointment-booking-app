@@ -34,7 +34,7 @@ const App = () => {
             <Route path="/client/home" element={<Client />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot/password" element={<ForgotPassword />} />
-            <Route path="/reset/password" element={<ResetPassword />} />
+            <Route path="/password/reset/:token" element={<ResetPassword />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

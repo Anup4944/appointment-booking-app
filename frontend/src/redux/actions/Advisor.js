@@ -104,7 +104,6 @@ export const openAvailability = (date, time, id) => async (dispatch) => {
   }
 };
 
-// Delete availaibility by lawyer
 export const deleteAvailability = (availabilityId) => async (dispatch) => {
   try {
     dispatch({ type: "deleteAvailabilityRequest" });
@@ -152,3 +151,52 @@ export const getAllAvailability = () => async (dispatch) => {
     });
   }
 };
+
+export const forgetPasswordAction = (email) => async (dispatch) => {
+  try {
+    dispatch({ type: "ForgetPasswordRequest" });
+
+    const { data } = await axios.post(
+      "http://localhost:4000/api/v1/forgot/password",
+      { email },
+      { withCredentials: true, credentials: "include" },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    dispatch({ type: "ForgetPasswordSuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "ForgetPasswordFailure",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const resetPasswordAction =
+  (token, password, confirmPassword) => async (dispatch) => {
+    try {
+      dispatch({ type: "ResetPasswordRequest" });
+
+      const { data } = await axios.put(
+        `http://localhost:4000/api/v1/reset/password/${token}`,
+        { password, confirmPassword },
+        { withCredentials: true, credentials: "include" },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      dispatch({ type: "ResetPasswordSuccess", payload: data });
+    } catch (error) {
+      dispatch({
+        type: "ResetPasswordFailure",
+        payload: error.response.data.message,
+      });
+    }
+  };
