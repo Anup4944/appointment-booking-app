@@ -12,7 +12,12 @@ dotenv.config({
   path: "./config/config.env",
 });
 app.use(cookieParser());
-app.use(cors({ origin: true, credentials: true }));
+app.use(
+  cors({
+    origin: ["https://appointmentbooking.onrender.com"],
+    credentials: true,
+  })
+);
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
