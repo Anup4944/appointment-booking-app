@@ -16,7 +16,7 @@ export const bookAppointmentAction =
       dispatch({ type: "BookingRequest" });
 
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/booking",
+        "https://api-appointment.onrender.com/api/v1/booking",
         {
           availableDate,
           time,
@@ -48,7 +48,7 @@ export const getBookingsById = (id) => async (dispatch) => {
     dispatch({ type: "BookingByIdRequest" });
 
     const { data } = await axios.get(
-      `http://localhost:4000/api/v1/booking/${id}`,
+      `https://api-appointment.onrender.com/api/v1/booking/${id}`,
 
       { withCredentials: true, credentials: "include" },
       {
@@ -87,7 +87,7 @@ export const deleteBookingAction =
       });
 
       const { data } = await axios.post(
-        `http://localhost:4000/api/v1/delete/booking/${id}`,
+        `https://api-appointment.onrender.com/api/v1/delete/booking/${id}`,
         {
           time,
           bookedDate,

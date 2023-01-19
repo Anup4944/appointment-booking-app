@@ -5,7 +5,7 @@ export const loadClientAction = () => async (dispatch) => {
     dispatch({ type: "LoadClientRequest" });
 
     const { data } = await axios.get(
-      "http://localhost:4000/api/v1/google/profile",
+      "https://api-appointment.onrender.com/api/v1/google/profile",
       {
         withCredentials: true,
       },
@@ -32,7 +32,7 @@ export const logoutClientAction = () => async (dispatch) => {
     dispatch({ type: "LogoutClientRequest" });
 
     await axios.get(
-      "http://localhost:4000/api/v1/google/logout",
+      "https://api-appointment.onrender.com/api/v1/google/logout",
       {
         withCredentials: true,
       },
