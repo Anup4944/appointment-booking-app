@@ -12,12 +12,7 @@ dotenv.config({
   path: "./config/config.env",
 });
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: ["https://appointmentbooking.onrender.com"],
-    credentials: true,
-  })
-);
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -29,6 +24,13 @@ app.use(
       httpOnly: process.env.NODE_ENV === "development" ? false : true,
       sameSite: process.env.NODE_ENV === "development" ? false : "none",
     },
+  })
+);
+
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
   })
 );
 
