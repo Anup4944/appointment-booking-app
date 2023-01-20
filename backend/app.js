@@ -11,6 +11,14 @@ const app = express();
 dotenv.config({
   path: "./config/config.env",
 });
+
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 app.use(cookieParser());
 
 app.use(
@@ -24,14 +32,6 @@ app.use(
       httpOnly: process.env.NODE_ENV === "development" ? false : true,
       sameSite: process.env.NODE_ENV === "development" ? false : "none",
     },
-  })
-);
-
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 

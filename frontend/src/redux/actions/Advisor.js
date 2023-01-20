@@ -55,6 +55,11 @@ export const loadAdvisorAction = () => async (dispatch) => {
       {
         withCredentials: true,
         credentials: "include",
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
 
