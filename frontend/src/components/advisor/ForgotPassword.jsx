@@ -26,6 +26,7 @@ const ForgotPassword = () => {
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <button onClick={handleOnClick}>Send verification</button>
         <a href="/">Back to login</a>
