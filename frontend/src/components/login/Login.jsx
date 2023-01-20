@@ -65,7 +65,10 @@ const Login = () => {
   }, [dispatch, message, error]);
 
   const handleOnLogin = () => {
-    window.open(`http://localhost:4000/api/v1/google/login`, "_self");
+    window.open(
+      `https://api-appointment.onrender.com/api/v1/google/login`,
+      "_self"
+    );
   };
 
   return isLoading || googleLoading ? (
