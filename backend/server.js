@@ -8,5 +8,7 @@ app.get("/", (req, res, next) => {
 });
 
 app.listen(process.env.PORT, () =>
-  console.log(`Bankend server running at http://localhost:${process.env.PORT}`)
+  console.log(
+    `Bankend server running at http://localhost:${process.env.PORT} in ${process.env.NODE_ENV} mode`
+  )
 );
