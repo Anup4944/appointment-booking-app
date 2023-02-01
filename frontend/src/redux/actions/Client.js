@@ -1,11 +1,12 @@
 import axios from "axios";
+import { server } from "../store";
 
 export const loadClientAction = () => async (dispatch) => {
   try {
     dispatch({ type: "LoadClientRequest" });
 
     const { data } = await axios.get(
-      "https://api-appointment.onrender.com/api/v1/google/profile",
+      `${server}/google/profile`,
       {
         withCredentials: true,
       },
@@ -32,7 +33,7 @@ export const logoutClientAction = () => async (dispatch) => {
     dispatch({ type: "LogoutClientRequest" });
 
     await axios.get(
-      "https://api-appointment.onrender.com/api/v1/google/logout",
+      `${server}/google/logout`,
       {
         withCredentials: true,
       },

@@ -18,21 +18,14 @@ app.use(
     resave: false,
     saveUninitialized: false,
 
-    cookie: {
-      secure: process.env.NODE_ENV === "development" ? false : true,
-      httpOnly: process.env.NODE_ENV === "development" ? false : true,
-      sameSite: process.env.NODE_ENV === "development" ? false : "none",
-    },
+    // cookie: {
+    //   secure: true,
+    //   httpOnly: true,
+    //   sameSite: "none",
+    // },
   })
 );
 app.use(cookieParser());
-
-app.use(passport.authenticate("session"));
-app.use(passport.initialize());
-app.use(passport.session());
-app.enable("trust proxy");
-
-connectPassport();
 
 app.use(express.json());
 app.use(
@@ -43,11 +36,17 @@ app.use(
 
 app.use(
   cors({
-    origin: process.env.FRONTEND,
+    origin: true,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
+
+app.use(passport.authenticate("session"));
+app.use(passport.initialize());
+app.use(passport.session());
+app.enable("trust proxy");
+connectPassport();
 
 // Import routes
 

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { server } from "../store";
 
 export const bookAppointmentAction =
   (
@@ -16,7 +17,7 @@ export const bookAppointmentAction =
       dispatch({ type: "BookingRequest" });
 
       const { data } = await axios.post(
-        "https://api-appointment.onrender.com/api/v1/booking",
+        `${server}/booking`,
         {
           availableDate,
           time,
@@ -48,7 +49,7 @@ export const getBookingsById = (id) => async (dispatch) => {
     dispatch({ type: "BookingByIdRequest" });
 
     const { data } = await axios.get(
-      `https://api-appointment.onrender.com/api/v1/booking/${id}`,
+      `${server}/booking/${id}`,
 
       { withCredentials: true, credentials: "include" },
       {
@@ -87,7 +88,7 @@ export const deleteBookingAction =
       });
 
       const { data } = await axios.post(
-        `https://api-appointment.onrender.com/api/v1/delete/booking/${id}`,
+        `${server}/delete/booking/${id}`,
         {
           time,
           bookedDate,

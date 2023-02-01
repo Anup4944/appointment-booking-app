@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../redux/actions/Advisor";
 import { Loading } from "..";
 import { Link } from "react-router-dom";
+import { server } from "../../redux/store";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -65,10 +66,7 @@ const Login = () => {
   }, [dispatch, message, error]);
 
   const handleOnLogin = () => {
-    window.open(
-      `https://api-appointment.onrender.com/api/v1/google/login`,
-      "_self"
-    );
+    window.open(`${server}/google/login`, "_self");
   };
 
   return isLoading || googleLoading ? (

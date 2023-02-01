@@ -1,11 +1,12 @@
 import axios from "axios";
+import { server } from "../store";
 
 export const loginAction = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: "LoginRequest" });
 
     const { data } = await axios.post(
-      "https://api-appointment.onrender.com/api/v1/login",
+      `${server}/login`,
       { email, password },
       { withCredentials: true, credentials: "include" },
       {
@@ -27,7 +28,7 @@ export const registerAction =
       dispatch({ type: "RegisterRequest" });
 
       const { data } = await axios.post(
-        "https://api-appointment.onrender.com/api/v1/register",
+        `${server}/register`,
         { fullName, email, password, category },
         { withCredentials: true, credentials: "include" },
         {
@@ -51,7 +52,7 @@ export const loadAdvisorAction = () => async (dispatch) => {
     dispatch({ type: "LoadUserRequest" });
 
     const { data } = await axios.get(
-      "https://api-appointment.onrender.com/api/v1/profile",
+      `${server}/profile`,
       {
         withCredentials: true,
         credentials: "include",
@@ -76,13 +77,10 @@ export const logoutAction = () => async (dispatch) => {
   try {
     dispatch({ type: "LogoutUserRequest" });
 
-    const { data } = await axios.get(
-      `https://api-appointment.onrender.com/api/v1/logout`,
-      {
-        withCredentials: true,
-        credentials: "include",
-      }
-    );
+    const { data } = await axios.get(`${server}/logout`, {
+      withCredentials: true,
+      credentials: "include",
+    });
 
     dispatch({ type: "LogoutUserSuccess", payload: data });
   } catch (error) {
@@ -97,7 +95,7 @@ export const openAvailability = (date, time, id) => async (dispatch) => {
   try {
     dispatch({ type: "openAvailabilityRequest" });
     const { data } = await axios.post(
-      "https://api-appointment.onrender.com/api/v1/open/availability",
+      `${server}/open/availability`,
       { availableDate: date, time, id },
       { withCredentials: true, credentials: "include" },
       {
@@ -119,7 +117,7 @@ export const deleteAvailability = (availabilityId) => async (dispatch) => {
   try {
     dispatch({ type: "deleteAvailabilityRequest" });
     const { data } = await axios.delete(
-      `https://api-appointment.onrender.com/api/v1/delete/available/${availabilityId}`,
+      `${server}/delete/available/${availabilityId}`,
 
       { withCredentials: true, credentials: "include" },
 
@@ -143,7 +141,7 @@ export const getAllAvailability = () => async (dispatch) => {
   try {
     dispatch({ type: "allAvailabilityRequest" });
     const { data } = await axios.get(
-      `https://api-appointment.onrender.com/api/v1/all/availability`,
+      `${server}/all/availability`,
 
       { withCredentials: true, credentials: "include" },
 
@@ -168,7 +166,7 @@ export const forgetPasswordAction = (email) => async (dispatch) => {
     dispatch({ type: "ForgetPasswordRequest" });
 
     const { data } = await axios.post(
-      "https://api-appointment.onrender.com/api/v1/forgot/password",
+      `${server}/forgot/password`,
       { email },
       { withCredentials: true, credentials: "include" },
       {
@@ -193,7 +191,7 @@ export const resetPasswordAction =
       dispatch({ type: "ResetPasswordRequest" });
 
       const { data } = await axios.put(
-        `https://api-appointment.onrender.com/api/v1/reset/password/${token}`,
+        `${server}/reset/password/${token}`,
         { password, confirmPassword },
         { withCredentials: true, credentials: "include" },
         {
