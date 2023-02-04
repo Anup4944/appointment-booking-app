@@ -1,5 +1,4 @@
 import axios from "axios";
-import { server } from "../store";
 
 export const bookAppointmentAction =
   (
@@ -17,7 +16,7 @@ export const bookAppointmentAction =
       dispatch({ type: "BookingRequest" });
 
       const { data } = await axios.post(
-        `${server}/booking`,
+        `/booking`,
         {
           availableDate,
           time,
@@ -49,7 +48,7 @@ export const getBookingsById = (id) => async (dispatch) => {
     dispatch({ type: "BookingByIdRequest" });
 
     const { data } = await axios.get(
-      `${server}/booking/${id}`,
+      `/booking/${id}`,
 
       { withCredentials: true, credentials: "include" },
       {
@@ -88,7 +87,7 @@ export const deleteBookingAction =
       });
 
       const { data } = await axios.post(
-        `${server}/delete/booking/${id}`,
+        `/delete/booking/${id}`,
         {
           time,
           bookedDate,

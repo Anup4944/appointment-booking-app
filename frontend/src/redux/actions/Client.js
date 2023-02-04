@@ -1,12 +1,11 @@
 import axios from "axios";
-import { server } from "../store";
 
 export const loadClientAction = () => async (dispatch) => {
   try {
     dispatch({ type: "LoadClientRequest" });
 
     const { data } = await axios.get(
-      `${server}/google/profile`,
+      `/google/profile`,
       {
         withCredentials: true,
       },
@@ -33,7 +32,7 @@ export const logoutClientAction = () => async (dispatch) => {
     dispatch({ type: "LogoutClientRequest" });
 
     await axios.get(
-      `${server}/google/logout`,
+      `/google/logout`,
       {
         withCredentials: true,
       },
