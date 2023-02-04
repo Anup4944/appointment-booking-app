@@ -5,8 +5,10 @@ import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 import { connectPassport } from "./utils/Provider.js";
 import session from "express-session";
 import cors from "cors";
+import path from "path";
 
 const app = express();
+const __dirname = path.resolve();
 
 dotenv.config({
   path: "./config/config.env",
@@ -58,6 +60,12 @@ import passport from "passport";
 app.use("/api/v1", advisorRouter);
 app.use("/api/v1", clientRouter);
 app.use("/api/v1", bookingRouter);
+
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+});
 
 app.use(errorMiddleware);
 

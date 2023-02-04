@@ -13,7 +13,7 @@ router.get(
 );
 
 router.get("/login/acc", passport.authenticate("google"), (req, res) => {
-  res.redirect(process.env.FRONTEND_URL);
+  res.redirect(`${req.protocol}://${req.get("host")}/client/home`);
 });
 
 router.get("/google/profile", isAuthenticated, myProfile);
