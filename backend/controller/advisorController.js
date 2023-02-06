@@ -221,11 +221,11 @@ export const forgotPassword = asyncAwait(async (req, res, next) => {
 
   await advisor.save();
 
-  const resetUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/password/reset/${resetPasswordToken}`;
+  // const resetUrl = `${req.protocol}://${req.get(
+  //   "host"
+  // )}/password/reset/${resetPasswordToken}`;
 
-  // const resetUrl = ` http://localhost:3000/password/reset/${resetPasswordToken}`;
+  const resetUrl = ` http://localhost:3000/password/reset/${resetPasswordToken}`;
 
   const message = `Reset your password by clicking on the link below: \n\n ${resetUrl}`;
 

@@ -4,7 +4,7 @@ import { connectDb } from "./config/db.js";
 connectDb();
 
 app.get("/", (req, res, next) => {
-  res.send("Working");
+  res.send(`Server working in ${process.env.NODE_ENV} mode`);
 });
 
 app.listen(process.env.PORT, () =>

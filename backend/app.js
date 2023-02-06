@@ -5,15 +5,14 @@ import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 import { connectPassport } from "./utils/Provider.js";
 import session from "express-session";
 import cors from "cors";
-import path from "path";
 
 const app = express();
-const __dirname = path.resolve();
 
 dotenv.config({
   path: "./config/config.env",
 });
 
+console.log(process.env.NODE_ENV);
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -24,6 +23,11 @@ app.use(
     //   secure: true,
     //   httpOnly: true,
     //   sameSite: "none",
+    // },
+    // cookie: {
+    //   secure: process.env.NODE_ENV === "development" ? false : true,
+    //   httpOnly: process.env.NODE_ENV === "development" ? false : true,
+    //   sameSite: process.env.NODE_ENV === "development" ? false : "none",
     // },
   })
 );
@@ -38,7 +42,7 @@ app.use(
 
 app.use(
   cors({
-    origin: true,
+    origin: process.env.FRONTEND_URL,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
@@ -60,12 +64,6 @@ import passport from "passport";
 app.use("/api/v1", advisorRouter);
 app.use("/api/v1", clientRouter);
 app.use("/api/v1", bookingRouter);
-
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
-});
 
 app.use(errorMiddleware);
 

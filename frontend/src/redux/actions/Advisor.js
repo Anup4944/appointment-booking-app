@@ -1,11 +1,12 @@
 import axios from "axios";
+import { server } from "../store";
 
 export const loginAction = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: "LoginRequest" });
 
     const { data } = await axios.post(
-      `/login`,
+      `${server}/login`,
       { email, password },
       { withCredentials: true, credentials: "include" },
       {
@@ -27,7 +28,7 @@ export const registerAction =
       dispatch({ type: "RegisterRequest" });
 
       const { data } = await axios.post(
-        `/register`,
+        `${server}/register`,
         { fullName, email, password, category },
         { withCredentials: true, credentials: "include" },
         {
@@ -51,7 +52,7 @@ export const loadAdvisorAction = () => async (dispatch) => {
     dispatch({ type: "LoadUserRequest" });
 
     const { data } = await axios.get(
-      `/profile`,
+      `${server}/profile`,
       {
         withCredentials: true,
         credentials: "include",
@@ -76,7 +77,7 @@ export const logoutAction = () => async (dispatch) => {
   try {
     dispatch({ type: "LogoutUserRequest" });
 
-    const { data } = await axios.get(`/logout`, {
+    const { data } = await axios.get(`${server}/logout`, {
       withCredentials: true,
       credentials: "include",
     });
@@ -94,7 +95,7 @@ export const openAvailability = (date, time, id) => async (dispatch) => {
   try {
     dispatch({ type: "openAvailabilityRequest" });
     const { data } = await axios.post(
-      `/open/availability`,
+      `${server}/open/availability`,
       { availableDate: date, time, id },
       { withCredentials: true, credentials: "include" },
       {
@@ -116,7 +117,7 @@ export const deleteAvailability = (availabilityId) => async (dispatch) => {
   try {
     dispatch({ type: "deleteAvailabilityRequest" });
     const { data } = await axios.delete(
-      `/delete/available/${availabilityId}`,
+      `${server}/delete/available/${availabilityId}`,
 
       { withCredentials: true, credentials: "include" },
 
@@ -140,7 +141,7 @@ export const getAllAvailability = () => async (dispatch) => {
   try {
     dispatch({ type: "allAvailabilityRequest" });
     const { data } = await axios.get(
-      `/all/availability`,
+      `${server}/all/availability`,
 
       { withCredentials: true, credentials: "include" },
 
@@ -165,7 +166,7 @@ export const forgetPasswordAction = (email) => async (dispatch) => {
     dispatch({ type: "ForgetPasswordRequest" });
 
     const { data } = await axios.post(
-      `/forgot/password`,
+      `${server}/forgot/password`,
       { email },
       { withCredentials: true, credentials: "include" },
       {
@@ -190,7 +191,7 @@ export const resetPasswordAction =
       dispatch({ type: "ResetPasswordRequest" });
 
       const { data } = await axios.put(
-        `/reset/password/${token}`,
+        `${server}/reset/password/${token}`,
         { password, confirmPassword },
         { withCredentials: true, credentials: "include" },
         {
