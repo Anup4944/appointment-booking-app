@@ -12,18 +12,17 @@ dotenv.config({
   path: "./config/config.env",
 });
 
-console.log(process.env.NODE_ENV);
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
 
-    // cookie: {
-    //   secure: true,
-    //   httpOnly: true,
-    //   sameSite: "none",
-    // },
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      sameSite: "none",
+    },
     // cookie: {
     //   secure: process.env.NODE_ENV === "development" ? false : true,
     //   httpOnly: process.env.NODE_ENV === "development" ? false : true,
