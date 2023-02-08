@@ -4,7 +4,6 @@ export const sendToken = (advisor, statusCode, res, message) => {
   const options = {
     expiresIn: "1hr",
     httpOnly: true,
-    secure: false,
   };
 
   // console.log("JWT", token);

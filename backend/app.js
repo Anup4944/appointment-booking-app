@@ -13,12 +13,18 @@ dotenv.config({
 });
 
 app.use(
+  cors({
+    origin: true,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
+
+app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
-    proxy: true,
-    name: "googleToken",
+    saveUninitialized: false,
 
     cookie: {
       secure: true,
@@ -38,14 +44,6 @@ app.use(express.json());
 app.use(
   urlencoded({
     extended: true,
-  })
-);
-
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 
