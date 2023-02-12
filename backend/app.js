@@ -20,8 +20,8 @@ app.use(
     saveUninitialized: false,
 
     cookie: {
-      secure: false,
-      httpOnly: false,
+      secure: true,
+      httpOnly: true,
       sameSite: "none",
     },
   })
