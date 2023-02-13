@@ -19,10 +19,11 @@ app.use(
     resave: false,
     saveUninitialized: false,
 
-    // cookie: {
-    //   httpOnly: true,
-    //   sameSite: "none",
-    // },
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      sameSite: "none",
+    },
   })
 );
 app.use(cookieParser());
