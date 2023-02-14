@@ -8,6 +8,7 @@ export const loadClientAction = () => async (dispatch) => {
     const { data } = await axios.get(
       `${server}/google/profile`,
       {
+        secure: true,
         withCredentials: true,
       },
       {
@@ -36,6 +37,7 @@ export const logoutClientAction = () => async (dispatch) => {
       `${server}/google/logout`,
       {
         withCredentials: true,
+        secure: true,
       },
       {
         headers: {
