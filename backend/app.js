@@ -12,13 +12,11 @@ const app = express();
 dotenv.config({
   path: "./config/config.env",
 });
-
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-
     cookie: {
       secure: true,
       httpOnly: true,
@@ -27,7 +25,6 @@ app.use(
   })
 );
 app.use(cookieParser());
-
 app.use(express.json());
 app.use(
   urlencoded({
@@ -37,7 +34,7 @@ app.use(
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: true,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
