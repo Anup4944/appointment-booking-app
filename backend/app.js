@@ -18,9 +18,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: true,
+      secure: false,
       httpOnly: true,
-      sameSite: "none",
+      sameSite: "lax",
     },
     // cookie: {
     //   secure: false,

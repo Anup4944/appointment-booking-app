@@ -2,10 +2,13 @@ export const sendToken = (advisor, statusCode, res, message) => {
   const token = advisor.generateToken();
 
   const options = {
-    expiresIn: "1hr",
+    expires: new Date(
+      Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+    ),
     httpOnly: true,
-    sameSite: "none",
-    // secure: true,
+    withCredentials: true,
+    // sameSite: "none",
+    secure: true,
   };
 
   // console.log("JWT", token);
