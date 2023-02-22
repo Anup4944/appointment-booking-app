@@ -7,7 +7,7 @@ export const sendToken = (advisor, statusCode, res, message) => {
     secure: true,
   };
 
-  // console.log("JWT", token);
+  console.log("JWT", token);
 
   res.status(statusCode).cookie("token", token, options).json({
     status: true,
