@@ -4,10 +4,11 @@ export const sendToken = (advisor, statusCode, res, message) => {
   const options = {
     expiresIn: "1hr",
     httpOnly: true,
-    secure: true,
+    sameSite: "none",
+    // secure: true,
   };
 
-  console.log("JWT", token);
+  // console.log("JWT", token);
 
   res.status(statusCode).cookie("token", token, options).json({
     status: true,
