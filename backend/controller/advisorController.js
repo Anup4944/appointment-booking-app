@@ -82,7 +82,7 @@ export const login = asyncAwait(async (req, res, next) => {
 export const logout = asyncAwait(async (req, res, next) => {
   res
     .status(200)
-    .cookie("token", "", { expires: new Date(0), httpOnly: true })
+    .cookie("token", "", { expires: new Date(0), httpOnly: true, path: "/" })
     .json({
       success: true,
       message: "Logout success",
