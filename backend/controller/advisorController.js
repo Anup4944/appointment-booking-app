@@ -1,7 +1,7 @@
 import { Advisor } from "../models/Advisor.js";
 import { asyncAwait } from "../middlewares/errorMiddleware.js";
 import ErrorHandler from "../utils/errorHandler.js";
-import { sendToken } from "../utils/token.js";
+import { deleteToken, sendToken } from "../utils/token.js";
 import { Availablity } from "../models/Availability.js";
 import { sendEmail } from "../utils/sendEmail.js";
 import crypto from "crypto";
@@ -80,11 +80,19 @@ export const login = asyncAwait(async (req, res, next) => {
 });
 
 export const logout = asyncAwait(async (req, res, next) => {
-  res.clearCookie("token");
-  res.status(200).json({
-    success: true,
-    message: "Logout success",
-  });
+  // res
+  //   .status(200)
+  //   .cookie("token", null, {
+  //     expires: new Date(Date.now()),
+  //     httpOnly: true,
+  //   })
+  //   .json({
+  //     success: true,
+  //     message: "Logout success",
+  //   });
+  const message = "Logged out!";
+
+  deleteToken(advisor, 200, res, message);
 });
 
 export const openAvailiability = asyncAwait(async (req, res, next) => {
