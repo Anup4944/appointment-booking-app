@@ -12,9 +12,13 @@ router.get(
   })
 );
 
-router.get("/login/acc", passport.authenticate("google"), (req, res) => {
-  res.redirect(process.env.FRONTEND_CLIENT_URL);
-});
+router.get(
+  "/login/acc",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    res.redirect(process.env.FRONTEND_CLIENT_URL);
+  }
+);
 
 router.get("/google/profile", isAuthenticated, myProfile);
 
