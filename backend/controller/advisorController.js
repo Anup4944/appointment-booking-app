@@ -90,6 +90,8 @@ export const logout = asyncAwait(async (req, res, next) => {
   //     success: true,
   //     message: "Logout success",
   //   });
+
+  const advisor = await Advisor.findOne({ email });
   const message = "Logged out!";
 
   deleteToken(advisor, 200, res, message);

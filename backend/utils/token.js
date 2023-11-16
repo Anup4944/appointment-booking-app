@@ -20,7 +20,7 @@ export const sendToken = (advisor, statusCode, res, message) => {
     token,
   });
 };
-export const deleteToken = (advisor, statusCode, res, message) => {
+export const deleteToken = (statusCode, res, message) => {
   const token = "";
 
   const options = {
@@ -35,10 +35,8 @@ export const deleteToken = (advisor, statusCode, res, message) => {
 
   // console.log("JWT", token);
 
-  res.status(statusCode).cookie("token", token, options).json({
+  res.status(statusCode).cookie("token", options).json({
     status: true,
     message,
-    advisor,
-    token,
   });
 };
