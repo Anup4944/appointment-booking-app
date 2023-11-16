@@ -21,6 +21,7 @@ export const sendToken = (advisor, statusCode, res, message) => {
   });
 };
 export const deleteToken = (statusCode, res, message) => {
+  console.log("got hit");
   const token = "";
 
   const options = {

@@ -80,21 +80,22 @@ export const login = asyncAwait(async (req, res, next) => {
 });
 
 export const logout = asyncAwait(async (req, res, next) => {
-  // res
-  //   .status(200)
-  //   .cookie("token", null, {
-  //     expires: new Date(Date.now()),
-  //     httpOnly: true,
-  //   })
-  //   .json({
-  //     success: true,
-  //     message: "Logout success",
-  //   });
+  res
+    .status(200)
+    .cookie("token", null, {
+      expires: new Date(Date.now()),
+      httpOnly: true,
+    })
+    .json({
+      success: true,
+      message: "Logout success",
+    });
 
-  const advisor = await Advisor.findOne({ email });
-  const message = "Logged out!";
+  // const advisor = await Advisor.findById(req.advisor._id);
+  // console.log(advisor);
+  // const message = "Logged out!";
 
-  deleteToken(advisor, 200, res, message);
+  // deleteToken(advisor.email, 200, res, message);
 });
 
 export const openAvailiability = asyncAwait(async (req, res, next) => {

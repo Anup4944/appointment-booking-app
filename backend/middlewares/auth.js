@@ -6,7 +6,7 @@ import { Advisor } from "../models/Advisor.js";
 export const isAuth = asyncAwait(async (req, res, next) => {
   const { token } = req.cookies;
 
-  // console.log(token);
+  // console.log("got hit", token);
 
   if (!token) {
     return next(new ErrorHandler("Please login to access this resource", 401));
