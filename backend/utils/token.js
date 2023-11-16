@@ -7,7 +7,7 @@ export const sendToken = (advisor, statusCode, res, message) => {
     ),
     httpOnly: true,
     withCredentials: true,
-    // sameSite: "none",
+    sameSite: "none",
     secure: true,
   };
 
