@@ -15,7 +15,7 @@ const Header = () => {
   );
 
   const logoutHandler = () => {
-    window.sessionStorage.removeItem("token");
+    // window.sessionStorage.removeItem("token");
     dispatch(logoutAction());
   };
 
