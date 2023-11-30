@@ -18,6 +18,7 @@ export const loadClientAction = () => async (dispatch) => {
         },
       }
     );
+    console.log(data);
     dispatch({
       type: "LoadClientSuccess",
       payload: data.user,
