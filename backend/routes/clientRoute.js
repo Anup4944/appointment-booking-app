@@ -16,7 +16,7 @@ router.get(
   "/login/acc",
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
-    res.redirect(process.env.FRONTEND_CLIENT_URL);
+    res.send("Logged In");
   }
 );
 
