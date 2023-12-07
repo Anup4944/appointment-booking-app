@@ -85,6 +85,8 @@ export const logout = asyncAwait(async (req, res, next) => {
     .cookie("token", null, {
       expires: new Date(0),
       httpOnly: true,
+      path: "/",
+      domain: "https://bookingwithadvisor.vercel.app",
     })
     .json({
       success: true,
