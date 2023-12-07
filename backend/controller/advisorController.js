@@ -87,6 +87,7 @@ export const logout = asyncAwait(async (req, res, next) => {
       httpOnly: true,
       path: "/",
       domain: "https://bookingwithadvisor.vercel.app",
+      secure: true,
     })
     .json({
       success: true,
