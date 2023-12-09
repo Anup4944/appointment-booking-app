@@ -1,7 +1,7 @@
 import { Advisor } from "../models/Advisor.js";
 import { asyncAwait } from "../middlewares/errorMiddleware.js";
 import ErrorHandler from "../utils/errorHandler.js";
-import { deleteToken, sendToken } from "../utils/token.js";
+import { sendToken } from "../utils/token.js";
 import { Availablity } from "../models/Availability.js";
 import { sendEmail } from "../utils/sendEmail.js";
 import crypto from "crypto";
@@ -82,24 +82,11 @@ export const login = asyncAwait(async (req, res, next) => {
 export const logout = asyncAwait(async (req, res, next) => {
   res
     .status(200)
-    .cookie("token", null, {
-      expires: new Date(0),
-      httpOnly: true,
-      path: "/",
-      domain: "https://bookingwithadvisor.vercel.app",
-      secure: true,
-      sameSite: "none",
-    })
+    .cookie("token", null, { expires: new Date(Date.now()), httpOnly: true })
     .json({
       success: true,
       message: "Logout success",
     });
-
-  // const advisor = await Advisor.findById(req.advisor._id);
-  // console.log(advisor);
-  // const message = "Logged out!";
-
-  // deleteToken(advisor.email, 200, res, message);
 });
 
 export const openAvailiability = asyncAwait(async (req, res, next) => {

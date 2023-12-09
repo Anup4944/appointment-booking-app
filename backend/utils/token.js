@@ -20,24 +20,3 @@ export const sendToken = (advisor, statusCode, res, message) => {
     token,
   });
 };
-export const deleteToken = (statusCode, res, message) => {
-  console.log("got hit");
-  const token = "";
-
-  const options = {
-    expires: new Date(
-      Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true,
-    withCredentials: true,
-    sameSite: "none",
-    secure: true,
-  };
-
-  // console.log("JWT", token);
-
-  res.status(statusCode).cookie("token", options).json({
-    status: true,
-    message,
-  });
-};
