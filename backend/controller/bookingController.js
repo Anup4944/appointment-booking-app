@@ -214,3 +214,20 @@ export const deleteBooking = asyncAwait(async (req, res, next) => {
         )}  at ${req.body.time} has been added back`,
   });
 });
+
+// Delete expired booking
+export const deleteExpiredBooking = asyncAwait(async (req, res, next) => {
+  const currentDate = new Date();
+
+  // Find bookings where the booked date is in the past
+  const expiredBookings = await Bookings.find({
+    bookedDate: { $lt: currentDate },
+  });
+
+  if (expiredBookings.length > 0) {
+    // Delete expired bookings
+    await Bookings.deleteMany({
+      _id: { $in: expiredBookings.map((booking) => booking._id) },
+    });
+  }
+});

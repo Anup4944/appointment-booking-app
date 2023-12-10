@@ -280,3 +280,24 @@ export const resetPassword = asyncAwait(async (req, res, next) => {
 
   sendToken(advisor, 200, res, message);
 });
+
+export const deleteExpiredAvailability = asyncAwait(async (req, res) => {
+  const currentDate = new Date();
+
+  // Find availabilities where the available date is in the past
+  const expiredAvailabilities = await Availablity.find({
+    availableDate: { $lt: currentDate },
+  });
+
+  if (expiredAvailabilities.length > 0) {
+    // Delete expired availabilities
+    await Availablity.deleteMany({
+      _id: {
+        $in: expiredAvailabilities.map((availability) => availability._id),
+      },
+    });
+  }
+  res.status(200).json({
+    status: true,
+  });
+});

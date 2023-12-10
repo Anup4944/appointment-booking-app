@@ -12,6 +12,7 @@ import {
   deleteAvailability,
   forgotPassword,
   resetPassword,
+  deleteExpiredAvailability,
 } from "../controller/advisorController.js";
 import { isAuth } from "../middlewares/auth.js";
 
@@ -25,5 +26,6 @@ router.route("/all/availability").get(getAllAvailability);
 router.route("/delete/available/:id").delete(isAuth, deleteAvailability);
 router.route("/forgot/password").post(forgotPassword);
 router.route("/reset/password/:token").put(resetPassword);
+router.route("/delete/expired/availability").delete(deleteExpiredAvailability);
 
 export default router;

@@ -47,6 +47,10 @@ GET http://localhost:4000/api/v1/all/availability
 ### Delete availability
 DELETE http://localhost:4000/api/v1/delete/available/639bb45c0fe1c281d8b904be
 
+### Delete expired availability
+DELETE http://localhost:4000/api/v1/delete/expired/availability
+
+
 ### Forgot password
 POST http://localhost:4000/api/v1/forgot/password
 Content-Type: application/json
