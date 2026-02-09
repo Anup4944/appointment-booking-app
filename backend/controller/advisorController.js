@@ -80,13 +80,7 @@ export const login = asyncAwait(async (req, res, next) => {
 });
 
 export const logout = asyncAwait(async (req, res, next) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-  });
-
-  res.status(200).json({
+  res.status(200).cookie("token", null, getCookieOptions(false)).json({
     success: true,
     message: "Logout success",
   });
