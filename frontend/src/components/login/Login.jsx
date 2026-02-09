@@ -124,7 +124,7 @@ const Login = () => {
             <button>Login</button>
           </form>
           <div className="line"></div>
-          <div>
+          <div className="actions">
             <Link to="/register">
               {" "}
               <button>Register as Advisor</button>

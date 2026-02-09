@@ -21,16 +21,21 @@ const ForgotPassword = () => {
   ) : (
     <div>
       <div>
-        {message && <h3>{message}</h3>}
+        {message && <h3 className="form-title">{message}</h3>}
         <input
+          className="form-input"
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <button onClick={handleOnClick}>Send verification</button>
-        <a href="/">Back to login</a>
-      </div>{" "}
+        <button className="submit-button" onClick={handleOnClick}>
+          Send verification
+        </button>
+        <button onClick={() => (window.location.href = "/")}>
+          Back to login
+        </button>
+      </div>
     </div>
   );
 };

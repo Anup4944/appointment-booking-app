@@ -1,7 +1,6 @@
 @import "colors";
 @import "fonts";
 @import "responsiveWidth";
-@import "colors";
 
 div {
   width: 100%;
@@ -12,25 +11,38 @@ div {
   background-color: $main-backgroud;
 
   div {
-    width: 25vw;
+    width: 35vw;
     background-color: $white;
     padding: 20px 0px;
+
     form {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      h3 {
-        font: $secondaryFont;
+
+      .form-header {
         text-align: center;
-        color: $btn-text-clr;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        font: $secondaryFont;
+        h3 {
+          color: $headerColor;
+          font-size: 1.8rem;
+        }
+
+        p {
+          color: $gradient;
+        }
       }
 
       div {
         position: relative;
         input {
           padding: 1vmax 3vmax;
-          min-width: 40%;
+          min-width: 70%;
           box-sizing: border-box;
           border: 1px solid rgba(0, 0, 0, 0.267);
           outline: none;
@@ -47,7 +59,7 @@ div {
         }
         select {
           font: $secondaryFont;
-          width: 90%;
+          min-width: 50%;
           padding: 1vmax 4vmax;
           margin: 2rem 0;
           box-sizing: border-box;

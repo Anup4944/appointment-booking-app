@@ -40,7 +40,10 @@ const Register = () => {
         <div>
           <form encType="multipart/form-data" onSubmit={handleOnRegisterSubmit}>
             {message && <h3>{message}</h3>}
-
+            <div className="form-header">
+              <h3>Lawyer Registration</h3>
+              <p>Create your account to get started</p>
+            </div>
             <div>
               <span>
                 <AiOutlineTeam />
@@ -54,7 +57,6 @@ const Register = () => {
                 onChange={(e) => setFullName(e.target.value)}
               />
             </div>
-
             <div>
               <span>
                 <AiOutlineMail />
@@ -68,7 +70,6 @@ const Register = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-
             <div>
               <span>
                 <AiOutlineLock />
@@ -94,7 +95,9 @@ const Register = () => {
               </select>
             </div>
             <button type="submit">Register</button>
-            <a href="/">Back to login</a>
+            <button onClick={() => (window.location.href = "/")}>
+              Back to login
+            </button>{" "}
           </form>
         </div>
       </div>

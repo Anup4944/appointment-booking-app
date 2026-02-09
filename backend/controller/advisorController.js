@@ -16,8 +16,8 @@ export const register = asyncAwait(async (req, res, next) => {
     return next(
       new ErrorHandler(
         `An account with ${email} has already been registered`,
-        402
-      )
+        402,
+      ),
     );
   }
   const user = await User.findOne({ email });
@@ -26,8 +26,8 @@ export const register = asyncAwait(async (req, res, next) => {
     return next(
       new ErrorHandler(
         `Client account already exist with ${email}. Please use different email address.`,
-        402
-      )
+        402,
+      ),
     );
   }
 
@@ -80,13 +80,23 @@ export const login = asyncAwait(async (req, res, next) => {
 });
 
 export const logout = asyncAwait(async (req, res, next) => {
-  res
-    .status(200)
-    .cookie("token", null, { expires: new Date(Date.now()), httpOnly: true })
-    .json({
-      success: true,
-      message: "Logout success",
-    });
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+
+  res.status(200).json({
+    success: true,
+    message: "Logout success",
+  });
+  // res
+  //   .status(200)
+  //   .cookie("token", null, { expires: new Date(Date.now()), httpOnly: true })
+  //   .json({
+  //     success: true,
+  //     message: "Logout success",
+  //   });
 });
 
 export const openAvailiability = asyncAwait(async (req, res, next) => {
@@ -100,7 +110,7 @@ export const openAvailiability = asyncAwait(async (req, res, next) => {
 
   if (newAvailablityData.availableDate <= Date.now()) {
     return next(
-      new ErrorHandler("Available date must be for future dates", 402)
+      new ErrorHandler("Available date must be for future dates", 402),
     );
   }
 
@@ -114,7 +124,7 @@ export const openAvailiability = asyncAwait(async (req, res, next) => {
     return res.status(401).json({
       success: false,
       message: `Your availablity for ${new Date(
-        req.body.availableDate
+        req.body.availableDate,
       )}  at ${req.body.time.toUpperCase()} has already been added. You cannot add same time availability twice`,
     });
   }
@@ -143,7 +153,7 @@ export const openAvailiability = asyncAwait(async (req, res, next) => {
 // Get all advisorys
 export const getAllAdvisor = asyncAwait(async (req, res) => {
   const allAdvisor = await Advisor.find().populate(
-    "availableDatesAndTime upComingBooking"
+    "availableDatesAndTime upComingBooking",
   );
 
   if (allAdvisor.length < 0) {
@@ -158,7 +168,7 @@ export const getAllAdvisor = asyncAwait(async (req, res) => {
 // Get advisory by cookie when reloading the page in frontend
 export const advisorProfile = asyncAwait(async (req, res) => {
   const advisor = await Advisor.findById(req.advisor._id).populate(
-    "availableDatesAndTime"
+    "availableDatesAndTime",
   );
 
   res.status(200).json({ status: true, advisor });

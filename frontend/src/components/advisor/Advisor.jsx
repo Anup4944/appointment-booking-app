@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import Header from "../Header";
 import { Loading } from "..";
+import { deleteExpiredAvailability } from "../../redux/actions/Advisor";
 
 const Advisor = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const Advisor = () => {
       });
       dispatch({ type: "clearMsg" });
     }
+    dispatch(deleteExpiredAvailability());
   }, [dispatch, message, advisor.fullName, bookedMsg]);
   return (
     <>

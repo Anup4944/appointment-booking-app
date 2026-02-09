@@ -209,3 +209,27 @@ export const resetPasswordAction =
       });
     }
   };
+
+export const deleteExpiredAvailability = () => async (dispatch) => {
+  try {
+    dispatch({ type: "deleteExpiredAvailabilityRequest" });
+    await axios.delete(
+      `${server}/delete/expired/availability`,
+
+      { withCredentials: true, credentials: "include" },
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    dispatch({ type: "deleteExpiredAvailabilitySuccess" });
+  } catch (error) {
+    dispatch({
+      type: "deleteExpiredAvailabilityFailure",
+      payload: error.response.data.message,
+    });
+  }
+};

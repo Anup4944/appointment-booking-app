@@ -7,199 +7,212 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
+
   .cart {
     display: flex;
-    width: 60%;
-    border-radius: 10px;
-    min-height: 500px;
+    width: min(90%, 1200px); // Better responsive width with max constraint
+    border-radius: 12px; // Slightly larger radius for modern look
+    min-height: 600px; // Increased min-height for better proportions
     overflow: hidden;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04); // Added subtle shadow
+
     .left {
       flex: 1;
       background: $gradient,
         url("https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80")
           center;
       background-size: cover;
-      padding: 50px;
+      padding: 3rem; // Using rem for consistent spacing
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      justify-content: center; // Center content vertically
+      gap: 2rem; // Consistent rem-based spacing
       color: $white;
+
       h1 {
         font: $mainFont;
-        line-height: 100px;
+        line-height: 1.2; // Relative line-height instead of fixed pixels
+        font-size: clamp(2rem, 5vw, 4rem); // Responsive font sizing
       }
+
       p {
         font: $primaryFont;
+        font-size: clamp(1rem, 2.5vw, 1.25rem); // Responsive paragraph text
+        opacity: 0.95; // Slight transparency for better hierarchy
       }
+
       button {
         display: flex;
         justify-content: center;
-        border-radius: 20px;
         align-items: center;
-        gap: 5px;
-        width: 50%;
-        padding: 10px;
+        gap: 0.5rem;
+        width: fit-content; // Auto-size based on content
+        max-width: 60%; // Prevent button from being too wide
+        padding: 0.75rem 1.5rem; // Better padding proportions
         border: none;
+        border-radius: 25px; // More rounded for modern look
         background-color: $white;
         color: $btn-text-clr;
         cursor: pointer;
         font: $secondaryFont;
-        transition: 0.1s ease-in;
-        font: $mini;
+        font-size: 0.9rem; // Consistent font sizing
+        transition: all 0.2s ease; // Smoother transition
+
         &:hover {
           background-color: $btn-text-clr;
           color: $white;
+          transform: translateY(-1px); // Subtle hover lift effect
         }
+
+        &:focus {
+          outline: 2px solid $white;
+          outline-offset: 2px;
+        } // Added focus state for accessibility
       }
     }
+
     .right {
       flex: 1;
-      padding: 50px;
+      padding: 3rem; // Consistent rem-based padding
       display: flex;
       justify-content: center;
       flex-direction: column;
-      gap: 30px;
+      gap: 2rem; // Consistent spacing
       background-color: $white;
       min-width: 50%;
+
       h1 {
         font: $primaryFont;
         color: $headerColor;
+        font-size: clamp(1.5rem, 3vw, 2rem); // Responsive heading
+        margin-bottom: 0.5rem;
       }
+
       form {
         display: flex;
         flex-direction: column;
-        gap: 30px;
-        position: relative;
+        gap: 1.5rem; // More reasonable gap
+
         input {
-          padding: 1vmax 4vmax;
-          padding-left: 1vmax;
-          min-width: 100%;
+          padding: 1rem; // Consistent rem-based padding
+          width: 100%;
           box-sizing: border-box;
-          border: 1px solid rgba(0, 0, 0, 0.267);
+          border: 2px solid rgba(0, 0, 0, 0.1); // Thicker, lighter border
+          border-radius: 8px; // Added border radius
           outline: none;
+          font-size: 1rem; // Consistent font size
+          transition: border-color 0.2s ease; // Smooth border transition
+
+          &:focus {
+            border-color: $btn-text-clr;
+            box-shadow: 0 0 0 3px rgba($btn-text-clr, 0.1);
+          } // Better focus state
         }
+
         .passHolder {
+          position: relative; // Better positioning context
           display: flex;
           align-items: center;
-          justify-content: center;
+
+          input {
+            padding-right: 3rem; // Space for icon
+          }
 
           span {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: sticky;
-            transform: translateX(-35px);
-            font-size: 1vmax;
+            position: absolute;
+            right: 1rem; // Better positioning
+            font-size: 1.25rem;
             cursor: pointer;
+            color: rgba(0, 0, 0, 0.5);
+            transition: color 0.2s ease;
+
+            &:hover {
+              color: $btn-text-clr;
+            } // Added hover state
           }
         }
 
         button {
-          margin-top: 30px;
-          width: 50%;
-          padding: 15px;
-          border-radius: 10px;
+          margin-top: 1rem;
+          width: 100%; // Full width for better mobile experience
+          padding: 1rem;
+          border-radius: 8px;
           border: none;
           background-color: $btn-text-clr;
           color: $white;
           cursor: pointer;
+          font-size: 1rem;
+          font-weight: 600; // Bolder text for CTA
+          transition: all 0.2s ease;
+
+          &:hover {
+            background-color: darken($btn-text-clr, 10%);
+            transform: translateY(-1px);
+          } // Better hover effect
+
+          &:focus {
+            outline: 2px solid $btn-text-clr;
+            outline-offset: 2px;
+          } // Focus state
         }
       }
+
       .line {
         height: 1px;
-        background: black;
+        background: rgba(0, 0, 0, 0.1); // Lighter separator
+        margin: 1rem 0;
       }
 
-      div {
+      .actions {
+        // Added class name for clarity
         display: flex;
         justify-content: space-between;
+        gap: 1rem; // Added gap for better spacing
+        flex-wrap: wrap; // Allow wrapping on small screens
+
         button {
-          padding: 10px;
-          border-radius: 10px;
-          border: none;
-          background-color: $btn-text-clr;
-          color: $white;
+          padding: 0.75rem 1.5rem;
+          border-radius: 8px;
+          border: 2px solid $btn-text-clr; // Added border for secondary buttons
+          background-color: transparent;
+          color: $btn-text-clr;
           cursor: pointer;
+          font-size: 0.9rem;
+          transition: all 0.2s ease;
+          flex: 1; // Equal width buttons
+          min-width: 120px; // Minimum width
+
+          &:hover {
+            background-color: $btn-text-clr;
+            color: $white;
+          }
+
+          &:focus {
+            outline: 2px solid $btn-text-clr;
+            outline-offset: 2px;
+          }
         }
       }
     }
   }
 }
+
 @media screen and (max-width: $large) {
   .login {
-    width: 100%;
-    height: 100%;
     .cart {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-      min-width: 105%;
-      padding: 10px 10px;
+      width: 95%;
+      min-height: 500px;
 
       .left {
-        width: 50vw;
+        padding: 2rem;
+        gap: 1.5rem;
       }
 
       .right {
-        width: 120px;
-        h1 {
-          font-size: 20px;
-        }
-
-        form {
-          input {
-            padding: 20px;
-            font-size: 20px;
-          }
-          .passHolder {
-            span {
-              font-size: 20px;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-@media screen and (max-width: $extraSmall) {
-  .login {
-    .cart {
-      flex-direction: column;
-      height: 100vh;
-
-      .left {
-        width: 100vw;
-
-        h1,
-        p {
-          font-size: 25px;
-        }
-      }
-      .right {
-        padding: 30px;
-        gap: 20px;
-        width: 100vw;
-        h1 {
-          font-size: 25px;
-        }
-
-        form {
-          gap: 5px;
-          input {
-            padding: 20px;
-            font-size: 10px;
-          }
-          .passHolder {
-            span {
-              font-size: 20px;
-            }
-          }
-          button {
-            margin-top: 5px;
-          }
-        }
+        padding: 2rem;
+        gap: 1.5rem;
       }
     }
   }
@@ -207,42 +220,34 @@
 
 @media screen and (max-width: $small) {
   .login {
+    padding: 0.5rem;
+
     .cart {
       flex-direction: column;
-      height: 100vh;
+      width: 100%;
+      min-height: 100vh;
+      border-radius: 0; // Remove border radius on mobile
 
       .left {
-        width: 100vw;
+        min-height: 40vh; // Minimum height for hero section
+        padding: 2rem 1.5rem;
+        text-align: center;
 
-        h1,
-        p {
-          font-size: 25px;
-        }
         button {
-          margin-top: 10px;
+          max-width: 80%;
+          align-self: center;
         }
       }
-      .right {
-        padding: 30px;
-        gap: 20px;
-        width: 100vw;
-        h1 {
-          font-size: 25px;
-        }
 
-        form {
-          gap: 5px;
-          input {
-            padding: 20px;
-            font-size: 10px;
-          }
-          .passHolder {
-            span {
-              font-size: 20px;
-            }
-          }
+      .right {
+        padding: 2rem 1.5rem;
+        min-height: 60vh;
+
+        .actions {
+          flex-direction: column; // Stack buttons vertically on mobile
+
           button {
-            margin-top: 5px;
+            width: 100%;
           }
         }
       }
