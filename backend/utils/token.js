@@ -1,4 +1,4 @@
-import { getCookieOptions } from "./cookieHelper";
+import { getCookieOptions } from "./cookieHelper.js";
 
 export const sendToken = (advisor, statusCode, res, message) => {
   const token = advisor.generateToken();
