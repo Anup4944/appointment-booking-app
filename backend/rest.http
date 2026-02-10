@@ -86,7 +86,7 @@ Content-Type: application/json
 GET http://localhost:4000/api/v1/booking
 
 ### Get bookings by Id
-GET http://localhost:4000/api/v1/booking/63b2bc5221525d4db28f95ff
+GET http://localhost:4000/api/v1/booking/63f6ad02297dcd31e912f75f
 
 
 ### Delete booking

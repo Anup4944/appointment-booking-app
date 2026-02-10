@@ -107,10 +107,10 @@ export const allBookings = asyncAwait(async (req, res, next) => {
 
 // Get bookings by user Id
 export const getBookingById = asyncAwait(async (req, res, next) => {
-  const id = req.params;
+  const userId = req.params;
 
   const bookingById = await Bookings.find({
-    id,
+    user: userId.id,
   });
 
   if (bookingById.length <= 0) {
@@ -180,7 +180,7 @@ export const deleteBooking = asyncAwait(async (req, res, next) => {
   const ifAdvisor = `Your booking for ${new Date(req.body.bookedDate)} at ${
     req.body.time
   } with client ${user.name} has been cancelled. Availablity for ${new Date(
-    req.body.bookedDate
+    req.body.bookedDate,
   )}  at ${req.body.time} has been added back`;
 
   await sendEmail({
@@ -203,14 +203,14 @@ export const deleteBooking = asyncAwait(async (req, res, next) => {
         } with advisor Mr ${
           advisor.fullName
         } has been cancelled. Availablity for ${new Date(
-          req.body.bookedDate
+          req.body.bookedDate,
         )}  at ${req.body.time} has been added back`
       : `Your booking for ${new Date(req.body.bookedDate)} at ${
           req.body.time
         } with client ${
           user.name
         } has been cancelled. Availablity for ${new Date(
-          req.body.bookedDate
+          req.body.bookedDate,
         )}  at ${req.body.time} has been added back`,
   });
 });

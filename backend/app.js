@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(
   urlencoded({
     extended: true,
-  })
+  }),
 );
 
 app.use(
@@ -25,7 +25,7 @@ app.use(
     credentials: true,
     origin: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
-  })
+  }),
 );
 app.use(
   session({
@@ -37,7 +37,7 @@ app.use(
       httpOnly: process.env.NODE_ENV === "development" ? false : true,
       sameSite: process.env.NODE_ENV === "development" ? false : "none",
     },
-  })
+  }),
 );
 
 app.use(passport.authenticate("session"));
