@@ -18,7 +18,7 @@ import { isAuth } from "../middlewares/auth.js";
 
 router.route("/register").post(register);
 router.route("/login").post(login);
-router.route("/logout").get(isAuth, logout);
+router.route("/logout").get(logout);
 router.route("/all").get(getAllAdvisor);
 router.route("/open/availability").post(isAuth, openAvailiability);
 router.route("/profile").get(isAuth, advisorProfile);

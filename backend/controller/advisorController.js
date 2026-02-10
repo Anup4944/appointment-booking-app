@@ -80,17 +80,13 @@ export const login = asyncAwait(async (req, res, next) => {
 });
 
 export const logout = asyncAwait(async (req, res, next) => {
-  res.status(200).cookie("token", null, getCookieOptions(false)).json({
-    success: true,
-    message: "Logout success",
-  });
-  // res
-  //   .status(200)
-  //   .cookie("token", null, { expires: new Date(Date.now()), httpOnly: true })
-  //   .json({
-  //     success: true,
-  //     message: "Logout success",
-  //   });
+  res
+    .status(200)
+    .cookie("token", null, { expires: new Date(Date.now()), httpOnly: true })
+    .json({
+      success: true,
+      message: "Logout success",
+    });
 });
 
 export const openAvailiability = asyncAwait(async (req, res, next) => {
